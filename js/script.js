@@ -212,6 +212,25 @@ const projects = [
     link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     category: "programs"
   },
+
+// =================================== Osu
+
+  {
+    title: "OSU! Web (100.0K+ Members)",
+    description_card: "🌐 One of the most widely played rhythm games of all times.",
+    description: `
+      <p>osu! is a free-to-play rhythm game developed for PC, heavily inspired by titles like Osu! Tatakae! Ouendan. It focuses on clicking circles, sliding, and spinning on screen in time with music, allowing users to create or play community-made beatmaps.</p>
+      <h4 class="modal-subtitle">🛡️ My Journey</h4>
+
+      <ul>
+        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 200 different strings.</li>
+      </ul>
+    `,
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Osulogo.png",
+    link: "discord.gg/osu",
+    category: "translator"
+  },
+
 ]
 
 // =================================== Finished
