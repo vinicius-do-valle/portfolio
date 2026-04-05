@@ -124,7 +124,7 @@ const projects = [
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
 
       <ul>
-        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 2,500 different strings.</li>
+        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 2,400 different strings.</li>
       </ul>
     `,
     image: "https://cdn.discordapp.com/attachments/1003825224749416550/1490041943315583136/default-twitter-icon_1.webp?ex=69d29d32&is=69d14bb2&hm=16247515a0a09aba8de1a58cde2ff85877cc49630127525180f928158280fdb7&",
@@ -142,7 +142,7 @@ const projects = [
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
 
       <ul>
-        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 1,300 different strings.</li>
+        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 1,500 different strings.</li>
       </ul>
     `,
     image: "https://cdn.discordapp.com/attachments/1477469552211398771/1490042259977277571/11240281.png?ex=69d29d7e&is=69d14bfe&hm=4d006dab18a87316dd7899e661ef296e6b9a8a07893ccccbe5b92357718f0a54&",
@@ -176,7 +176,7 @@ const projects = [
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
 
       <ul>
-        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 900 different strings.</li>
+        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 920 different strings.</li>
       </ul>
     `,
     image: "https://hypixel.net/styles/hypixel-v2/images/hypixel-512px.png",
@@ -194,7 +194,7 @@ const projects = [
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
 
       <ul>
-        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 900 different strings.</li>
+        <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 150 different strings.</li>
       </ul>
     `,
     image: "https://pt.minecraft.wiki/images/Sodium_logo.png?23291",
