@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+<nav>
+<a href="#inicio">Início</a>
+<a href="#sobre">Sobre</a>
+<a href="#projetos">Projetos</a>
+<a href="#hire">Hire Me</a>
+<a href="#contato">Contato</a>
+</nav>
+</header>
+
+<section id="inicio" class="hero">
+<div class="hero-content">
+<div class="hero-text">
+<h1>Hello! <span>Xeva</span> here! 👋</h1>
+<p>Developer, Translator, and Community Manager with over 6 years of experience.</p>
+<a href="#projetos" class="btn">See Projects</a>
+</div>
+<img class="hero-avatar" src="https://i.pinimg.com/1200x/f7/76/4c/f7764c3bbb161d2a070ea9d3b4f2517d.jpg" />
+</div>
+</section>
+
+<section id="sobre" class="about">
+  <div class="about-container">
+    <div class="about-text">
+      <h2>About me!</h2>
+      <p>Hey there! I’m Xeeeva. I’m a translator, programmer, journalist, developer, among other roles. This portfolio gives a glimpse into my work, skills, and experience across technology, community management, and content creation.</p>
+    </div>
+    <div class="about-card">
+      <div class="card-content">
+        <h3>Skills</h3>
+        <ul>
+          <li><strong>Programming Languages:</strong> JavaScript, Java, Python, C, C#, C++, Lua</li>
+          <li><strong>Web Development:</strong> HTML, CSS, TypeScript, PHP</li>
+          <li><strong>Community Management:</strong> Discord Server Management (7.5M+ Members)</li>
+          <li><strong>Other Skills:</strong> Translation, Project Development, Journalist</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos" class="projects">
+<h2>Projects</h2>
+<div class="project-categories">
+<span class="category" data-filter="staff">Staff Management</span>
+<span class="category" data-filter="translator">Translator</span>
+<span class="category" data-filter="programs">Programs</span>
+</div>
+<div class="projects-grid" id="projects-container"></div>
+</section>
+
+<section id="hire" class="hire">
+<h2>Do you wanna hire me?</h2>
+<p>Feel free to reach out through any of the following platforms. I'll get back to you as soon as possible!</p>
+<div class="contact-links">
+<div class="contact-item">
+<h3>Discord</h3>
+<p>xeeeva#1234</p>
+</div>
+<div class="contact-item">
+<h3>Instagram</h3>
+<p>@vinivallz</p>
+</div>
+<div class="contact-item">
+<h3>Email</h3>
+<p>viniciusvallerodrigues@gmail.com</p>
+</div>
+</div>
+<a href="https://discord.com/users/455050718496161802" class="btn">Get in Touch</a>
+</section>
+
+<footer>
+<p>© 2026 - Xeva</p>
+</footer>
+
+<div id="project-modal">
+<div class="modal-content">
+<span class="close-modal">&times;</span>
+<img id="modal-image" />
+<h2 id="modal-title"></h2>
+<p id="modal-description"></p>
+<a id="modal-link" target="_blank">See Projects</a>
+</div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
