@@ -59,7 +59,7 @@ const projects = [
         <li>I worked as a Moderator on the server for five months, progressing through the team and reaching the Senior Moderator position. I eventually stepped down due to personal commitments related to school.</li>
       </ul>
     `,
-    image: "https://cdn.discordapp.com/attachments/1477469552211398771/1490044607231164727/channels4_profile.jpg?ex=69d29fae&is=69d14e2e&hm=826fcdac0352744ea1f36e7f673bcdfc241b115bd8033248c08f2cdfb63d19b5&",
+    image: "https://static.wikia.nocookie.net/famosos/images/a/ad/MushMC_logo_500x.png/revision/latest?cb=20230201012535&path-prefix=pt-br",
     link: "https://discord.gg/mush",
     category: "staff"
   },
@@ -127,7 +127,7 @@ const projects = [
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 2,400 different strings.</li>
       </ul>
     `,
-    image: "https://cdn.discordapp.com/attachments/1003825224749416550/1490041943315583136/default-twitter-icon_1.webp?ex=69d29d32&is=69d14bb2&hm=16247515a0a09aba8de1a58cde2ff85877cc49630127525180f928158280fdb7&",
+    image: "https://avatars.githubusercontent.com/u/57332930?s=280&v=4",
     link: "https://discord.gg/lunarclient",
     category: "translator"
   },
@@ -145,7 +145,7 @@ const projects = [
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 1,500 different strings.</li>
       </ul>
     `,
-    image: "https://cdn.discordapp.com/attachments/1477469552211398771/1490042259977277571/11240281.png?ex=69d29d7e&is=69d14bfe&hm=4d006dab18a87316dd7899e661ef296e6b9a8a07893ccccbe5b92357718f0a54&",
+    image: "https://avatars.githubusercontent.com/u/11240281?s=280&v=4",
     link: "https://discord.gg/badlion",
     category: "translator"
   },
