@@ -27,7 +27,7 @@ const projects = [
         <li>I served on the Moderation Team for approximately four months, helping maintain order and safety in an extremely active and diverse environment. Unfortunately, I stepped away from the team due to circumstances related to accusations involving the creator of the community.</li>
       </ul>
     `,
-    image: "https://cdn.discordapp.com/attachments/1477469552211398771/1490043492293152991/channels4_profile.jpg?ex=69d29ea4&is=69d14d24&hm=028ea74fb6cb4a1034bce3ff54caf81d9a0ef251da301abd129a63bc0d276a0a&",
+    image: "https://dbl-discord.usercontent.prism.gg/icons/311627659828527104/a_ef951d646f2f5c3112de4f8c7102a9c3.png?size=256",
     link: "https://discord.gg/gou",
     category: "staff"
   },
