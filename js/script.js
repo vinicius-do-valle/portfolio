@@ -43,7 +43,7 @@ const projects = [
         <li>I joined the team as a Community Journalist, producing written content for the server. I was also part of the staff team for five months before stepping down due to personal commitments, including school.</li>
       </ul>
     `,
-    image: "https://cdn.discordapp.com/icons/801894798641332254/2397e2b45c8bed774ca339e52369bfb8.png?size=2048",
+    image: "https://www.spicybaboon.com.au/cdn/shop/products/it-s-a-trap-sticker-39922710413597.png?v=1669616751",
     link: "https://discord.gg/itsatrap",
     category: "staff"
   },
@@ -75,7 +75,7 @@ const projects = [
         <li>I worked as a Moderator for approximately one year. I eventually stepped down due to school and work commitments.</li>
       </ul>
     `,
-    image: "https://cdn.discordapp.com/icons/1472578867246923913/a_cc6595dad43f3e85890ce05ad9527558.gif?size=2048",
+    image: "https://cdn.discordapp.com/icons/1472578867246923913/4d3359d367027f046bfc638d325da93c.png?size=2048",
     link: "https://discord.gg/UKPg88Weeh",
     category: "staff"
   },
