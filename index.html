@@ -7,96 +7,180 @@
 <title>Xeva's Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<header>
-<nav>
-<a href="#inicio">Home</a>
-<a href="#sobre">About Me</a>
-<a href="#projetos">Projects</a>
-<a href="#hire">Hire Me</a>
-</nav>
+<header id="site-header">
+  <nav>
+    <a href="#inicio">Home</a>
+    <a href="#sobre">About</a>
+    <a href="#projetos">Projects</a>
+    <a href="#hire">Hire Me</a>
+  </nav>
 </header>
 
+<!-- HERO -->
 <section id="inicio" class="hero">
-<div class="hero-content">
-<div class="hero-text">
-<h1>Hello! <span>Xeva</span> here! 👋</h1>
-<p>Developer, Translator, and Community Manager with over 6 years of experience.</p>
-<a href="#projetos" class="btn">See Projects</a>
-</div>
-<img class="hero-avatar" src="https://i.pinimg.com/1200x/f7/76/4c/f7764c3bbb161d2a070ea9d3b4f2517d.jpg" />
-</div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Available for work
+      </div>
+      <h1>
+        Hello! <span class="name">Xeva</span><br>
+        is here! <span class="wave">👋</span>
+      </h1>
+      <p>Developer, Translator, and Community Manager with over 6 years of experience building communities and shipping projects.</p>
+      <div class="hero-actions">
+        <a href="#projetos" class="btn-primary">See Projects →</a>
+        <a href="#hire" class="btn-secondary">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">6<span>+</span></div>
+          <div class="stat-label">Years exp.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3<span>M+</span></div>
+          <div class="stat-label">Community members</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">7<span>+</span></div>
+          <div class="stat-label">Languages</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-avatar-wrap">
+      <div class="hero-avatar-ring"></div>
+      <img class="hero-avatar" src="https://i.pinimg.com/1200x/f7/76/4c/f7764c3bbb161d2a070ea9d3b4f2517d.jpg" alt="Xeva" />
+    </div>
+  </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
 <section id="sobre" class="about">
   <div class="about-container">
     <div class="about-text">
-      <h2>About me!</h2>
-      <p>Hey there! I’m Xeeeva. I’m a translator, programmer, journalist, developer, among other roles. This portfolio gives a glimpse into my work, skills, and experience across technology, community management, and content creation.</p>
+      <div class="section-label">About me</div>
+      <h2>More than just a developer</h2>
+      <p>Hey there! I'm Xeeeva. I'm a translator, programmer, journalist, developer, and much more. This portfolio gives a glimpse into my work, skills, and experience across technology, community management, and content creation.</p>
     </div>
     <div class="about-card">
       <div class="card-content">
-        <h3>Skills</h3>
+        <h3>Skills & Expertise</h3>
         <ul>
-          <li><strong>Programming Languages:</strong> JavaScript, Java, Python, C, C#, C++, Lua</li>
-          <li><strong>Web Development:</strong> HTML, CSS, TypeScript, PHP</li>
-          <li><strong>Community Management:</strong> Discord Server Management (3.0M+ Members)</li>
-          <li><strong>Other Skills:</strong> Translation, Project Development, Journalist</li>
+          <li>
+            <strong>Programming Languages</strong>
+            JavaScript, Java, Python, C, C#, C++, Lua
+          </li>
+          <li>
+            <strong>Web Development</strong>
+            HTML, CSS, TypeScript, PHP
+          </li>
+          <li>
+            <strong>Community Management</strong>
+            Discord Server Management (3.0M+ Members)
+          </li>
+          <li>
+            <strong>Other Skills</strong>
+            Translation, Project Development, Journalism
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
 <section id="projetos" class="projects">
-<h2>Projects</h2>
-<div class="project-categories">
-<span class="category" data-filter="staff">Staff</span>
-<span class="category" data-filter="translator">Translator</span>
-<span class="category" data-filter="programs">Programs</span>
-</div>
-<div class="projects-grid" id="projects-container"></div>
+  <div class="projects-header">
+    <div>
+      <div class="section-label">Work</div>
+      <h2>Projects</h2>
+    </div>
+    <div class="project-categories">
+      <span class="category" data-filter="staff">Staff</span>
+      <span class="category" data-filter="translator">Translator</span>
+      <span class="category" data-filter="programs">Programs</span>
+    </div>
+  </div>
+  <div class="projects-grid" id="projects-container"></div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- HIRE -->
 <section id="hire" class="hire">
-<h2>Do you wanna hire me?</h2>
-<p>Feel free to reach out through any of the following platforms. I'll get back to you as soon as possible!</p>
-<div class="contact-links">
-<div class="contact-item">
-<h3>Discord</h3>
-<p>@xeeeva</p>
-</div>
-<div class="contact-item">
-<h3>Instagram</h3>
-<p>@vinivallz</p>
-</div>
-<div class="contact-item">
-<h3>Email</h3>
-<p>viniciusvallerodrigues@gmail.com</p>
-</div>
-</div>
-<a href="https://discord.com/users/455050718496161802" class="btn">Get in Touch</a>
+  <div class="hire-inner">
+    <div class="section-label" style="justify-content:center">Contact</div>
+    <h2>Want to <em>hire me?</em></h2>
+    <p>Feel free to reach out through any of the following platforms. I'll get back to you as soon as possible!</p>
+    <div class="contact-links">
+      <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <div>
+          <h3>Discord</h3>
+          <p>@xeeeva</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📸</div>
+        <div>
+          <h3>Instagram</h3>
+          <p>@vinivallz</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <h3>Email</h3>
+          <p>viniciusvallerodrigues<br>@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <a href="https://discord.com/users/455050718496161802" class="btn-primary" target="_blank">
+      Get in Touch →
+    </a>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-<p>© 2026 - Xeva</p>
+  <p>© 2026 <span class="footer-accent">Xeva</span></p>
+  <p>Built with care ✦</p>
 </footer>
 
+<!-- MODAL -->
 <div id="project-modal">
-<div class="modal-content">
-<span class="close-modal">&times;</span>
-<img id="modal-image" />
-<h2 id="modal-title"></h2>
-<p id="modal-description"></p>
-<a id="modal-link" target="_blank">See Projects</a>
-</div>
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div class="modal-img-wrap">
+      <img id="modal-image" src="" alt="" />
+    </div>
+    <div class="modal-body">
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+      <a id="modal-link" class="btn-modal" href="#" target="_blank">See Project →</a>
+    </div>
+  </div>
 </div>
 
-<script type="module" src="js/script.js"></script>
+<!-- header scroll script inline -->
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+</script>
+
+<script src="js/script.js" defer></script>
 </body>
 </html>

@@ -3,10 +3,8 @@ const projects = [
     title: "Volleyball Legends (2.00M+ Members)",
     description_card: "🔨 Largest Volleyball Community server on all of Discord.",
     description: `
-      <p>Volleyball Legends is one of the largest gaming communities on Discord, with over 2.0 million members, fully dedicated to the game Volleyball Legends. </p>
-
+      <p>Volleyball Legends is one of the largest gaming communities on Discord, with over 2.0 million members, fully dedicated to the game Volleyball Legends.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I joined the team as a Trial Moderator on July 16, was promoted to Moderator on July 30, and later became a Senior Moderator on September 17, and later became a Staff Supervisor, on December 6</li>
       </ul>
@@ -15,14 +13,12 @@ const projects = [
     link: "https://discord.gg/volleyballlegends",
     category: "staff"
   },
-  
   {
     title: "Goularte's Server (800.0K+ Members)",
     description_card: "🔨 One of the largest YouTuber communities on Discord.",
     description: `
       <p>The Servidor do Goularte was a massive Discord community with over 800,000 members, recognized as the largest community in Latin America for more than three years, and the largest YouTuber-led community in the world.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I served on the Moderation Team for approximately four months, helping maintain order and safety in an extremely active and diverse environment. Unfortunately, I stepped away from the team due to circumstances related to accusations involving the creator of the community.</li>
       </ul>
@@ -31,14 +27,12 @@ const projects = [
     link: "https://discord.gg/gou",
     category: "staff"
   },
-
   {
     title: "IT'S A TRAP (350.0K+ Members)",
     description_card: "🔨 One of the largest Brazilian YouTuber communities on Discord.",
     description: `
       <p>ITS A TRAP is a Discord community created around a well-known YouTuber, with over 350,000 members. The server is focused on geek culture, entertainment, and active community discussions.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I joined the team as a Community Journalist, producing written content for the server. I was also part of the staff team for five months before stepping down due to personal commitments, including school.</li>
       </ul>
@@ -47,14 +41,12 @@ const projects = [
     link: "https://discord.gg/itsatrap",
     category: "staff"
   },
-
   {
     title: "Mush (180.0K+ Members)",
     description_card: "🔨 The largest Minecraft server in Brazil.",
     description: `
       <p>Mush is a Brazilian Minecraft server, with over 5000 members usually, that offers multiple game modes such as PvP, minigames, and competitive events, bringing together a large and active player base.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a Moderator on the server for five months, progressing through the team and reaching the Senior Moderator position. I eventually stepped down due to personal commitments related to school.</li>
       </ul>
@@ -63,14 +55,12 @@ const projects = [
     link: "https://discord.gg/mush",
     category: "staff"
   },
-
   {
     title: "Decorations for Server (150.0K+ Members)",
     description_card: "🔨 The largest artistic community server on Discord.",
     description: `
       <p>Decorations for Server is one of the largest decoration-focused communities on Discord, with over 100,000 members dedicated to server aesthetics, resources, and customization.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a Moderator for approximately one year. I eventually stepped down due to school and work commitments.</li>
       </ul>
@@ -79,14 +69,12 @@ const projects = [
     link: "https://discord.gg/UKPg88Weeh",
     category: "staff"
   },
-
   {
     title: "Hylex (70.0K+ Members)",
     description_card: "🔨 The second largest Minecraft server in Brazil.",
     description: `
       <p>Hylex is a Brazilian Minecraft server that offers a variety of game modes, focusing on competitive gameplay and an active player base, with over 2500 members usually.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked on the server as a Builder and later as a Senior Moderator for seven months. I eventually left due to personal reasons.</li>
       </ul>
@@ -95,16 +83,12 @@ const projects = [
     link: "https://discord.gg/hylex",
     category: "staff"
   },
-
-// =================================== Minecraft
-
   {
     title: "Minecraft (4.00M+ Members)",
     description_card: "🌐 The best-selling sandbox game of all time.",
     description: `
-      <p>Minecraft is a sandbox game that allows players to explore, build, and survive in a procedurally generated world made of blocks. It features multiple game modes, including survival and creative, and offers endless possibilities through crafting, exploration, and player-driven content.</p>
+      <p>Minecraft is a sandbox game that allows players to explore, build, and survive in a procedurally generated world made of blocks.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Spanish, English, Brazilian Portuguese and European Portuguese, where I translated approximately 3,200 different strings.</li>
       </ul>
@@ -113,16 +97,12 @@ const projects = [
     link: "https://discord.gg/minecraft",
     category: "translator"
   },
-
-// =================================== Lunar Client
-
   {
     title: "Lunar Client (3.2M+ Members)",
     description_card: "🌐 The leading client designed specifically for Minecraft.",
     description: `
       <p>Lunar Client is a modded client for Minecraft that improves performance, adds built-in mods, and provides competitive features for a smoother gameplay experience.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 2,400 different strings.</li>
       </ul>
@@ -131,16 +111,12 @@ const projects = [
     link: "https://discord.gg/lunarclient",
     category: "translator"
   },
-
-// =================================== Badlion Client
-
   {
     title: "Badlion Client (2.6M+ Members)",
     description_card: "🌐 The second leading client designed specifically for Minecraft.",
     description: `
-      <p>Badlion Client is a modded client for Minecraft that offers performance improvements, built-in mods, and an integrated anti-cheat system for a more competitive and optimized experience.</p>
+      <p>Badlion Client is a modded client for Minecraft that offers performance improvements, built-in mods, and an integrated anti-cheat system.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 1,500 different strings.</li>
       </ul>
@@ -149,32 +125,26 @@ const projects = [
     link: "https://discord.gg/badlion",
     category: "translator"
   },
-
-// =================================== Garry's Mod
-
-    {
+  {
     title: "Garry's Mod (500.0K+ Members)",
     description_card: "🌐 One of the most influential sandbox games, widely recognized.",
     description: `
       <p>Garry's Mod is a physics-based sandbox game that allows players to manipulate objects, create custom game modes, and experiment freely using tools and community-made content.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 1,300 different strings.</li>
       </ul>
     `,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Garry%27s_Mod_logo.svg/960px-Garry%27s_Mod_logo.svg.png?_=20230223195930",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Garry%27s_Mod_logo.svg/960px-Garry%27s_Mod_logo.svg.png",
     link: "https://discord.gg/gmod",
     category: "translator"
   },
-// =================================== Hypixel
   {
     title: "Hypixel (480.0K+ Members)",
     description_card: "🌐 The Minecraft server with the highest player count currently.",
     description: `
-      <p>Hypixel is one of the largest and most popular servers for Minecraft. It is known for its wide variety of custom mini-games, such as Bed Wars and SkyBlock, as well as its high player count and active community.</p>
+      <p>Hypixel is one of the largest and most popular servers for Minecraft, known for its wide variety of custom mini-games such as Bed Wars and SkyBlock.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 920 different strings.</li>
       </ul>
@@ -183,16 +153,12 @@ const projects = [
     link: "https://discord.gg/hypixel",
     category: "translator"
   },
-
-// =================================== Sodium
-
   {
     title: "Sodium (100.0K+ Members)",
     description_card: "🌐 One of the most widely used performance optimization mods for Minecraft.",
     description: `
       <p>Sodium is a performance optimization mod for Minecraft, designed to significantly improve frame rates and reduce lag.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 150 different strings.</li>
       </ul>
@@ -201,100 +167,107 @@ const projects = [
     link: "https://modrinth.com/mod/sodium/versions",
     category: "translator"
   },
-
-  {
-    title: "In progress...",
-    description_card: "In progress...",
-    description: `
-      <p>In progress...</p>
-    `,
-    image: "https://images.vexels.com/media/users/3/152864/isolated/preview/2e095de08301a57890aad6898ad8ba4c-icone-de-ponto-de-interrogacao-do-circulo-amarelo.png",
-    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    category: "programs"
-  },
-
-// =================================== Osu
-
   {
     title: "OSU! Web (100.0K+ Members)",
     description_card: "🌐 One of the most widely played rhythm games of all times.",
     description: `
-      <p>osu! is a free-to-play rhythm game developed for PC, heavily inspired by titles like Osu! Tatakae! Ouendan. It focuses on clicking circles, sliding, and spinning on screen in time with music, allowing users to create or play community-made beatmaps.</p>
+      <p>osu! is a free-to-play rhythm game developed for PC. It focuses on clicking circles, sliding, and spinning on screen in time with music.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
-
       <ul>
         <li>I worked as a translator for Brazilian Portuguese and European Portuguese, where I translated approximately 200 different strings.</li>
       </ul>
     `,
     image: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Osulogo.png",
-    link: "discord.gg/osu",
+    link: "https://discord.gg/osu",
     category: "translator"
   },
+  {
+    title: "In progress...",
+    description_card: "In progress...",
+    description: `<p>In progress...</p>`,
+    image: "https://images.vexels.com/media/users/3/152864/isolated/preview/2e095de08301a57890aad6898ad8ba4c-icone-de-ponto-de-interrogacao-do-circulo-amarelo.png",
+    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    category: "programs"
+  },
+];
 
-]
+// ─── DOM refs ─────────────────────────────────────────────
+const container    = document.getElementById("projects-container");
+const categories   = document.querySelectorAll(".category");
+const modal        = document.getElementById("project-modal");
+const modalImage   = document.getElementById("modal-image");
+const modalTitle   = document.getElementById("modal-title");
+const modalDesc    = document.getElementById("modal-description");
+const modalLink    = document.getElementById("modal-link");
+const closeModalBtn = document.querySelector(".close-modal");
 
-// =================================== Finished
-
-
-const container = document.getElementById("projects-container")
-const categories = document.querySelectorAll(".category")
-
-const modal = document.getElementById("project-modal")
-const modalImage = document.getElementById("modal-image")
-const modalTitle = document.getElementById("modal-title")
-const modalDescription = document.getElementById("modal-description")
-const modalLink = document.getElementById("modal-link")
-const closeModal = document.querySelector(".close-modal")
-
+// ─── Render ───────────────────────────────────────────────
 function renderProjects(filter) {
-  container.innerHTML = ""
+  container.innerHTML = "";
 
-  const filtered = projects.filter(p => p.category === filter)
+  const filtered = projects.filter(p => p.category === filter);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<p style="color:var(--text-muted);grid-column:1/-1">No projects yet.</p>`;
+    return;
+  }
 
   filtered.forEach((project) => {
-    const card = document.createElement("div")
-    card.classList.add("project-card")
+    const card = document.createElement("div");
+    card.classList.add("project-card");
 
     card.innerHTML = `
-      <img src="${project.image}">
+      <img src="${project.image}" alt="${project.title}" />
       <div class="project-info">
         <h3>${project.title}</h3>
         <p>${project.description_card}</p>
         <button class="open-project btn-project">See Project</button>
       </div>
-    `
+    `;
 
     card.querySelector(".open-project").addEventListener("click", () => {
-      modalImage.src = project.image
-      modalTitle.textContent = project.title
-      modalDescription.innerHTML = project.description
-      modalLink.href = project.link
-      modal.style.display = "flex"
-    })
+      modalImage.src        = project.image;
+      modalImage.alt        = project.title;
+      modalTitle.textContent = project.title;
+      modalDesc.innerHTML   = project.description;
+      modalLink.href        = project.link;
+      // FIX: usar a classe .open que o CSS espera
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    });
 
-    container.appendChild(card)
-  })
+    container.appendChild(card);
+  });
 }
 
-renderProjects("staff")
+// ─── Fechar modal ─────────────────────────────────────────
+function closeModalFn() {
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+}
 
+closeModalBtn.addEventListener("click", closeModalFn);
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) closeModalFn();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModalFn();
+});
+
+// ─── Filtros ──────────────────────────────────────────────
 categories.forEach(category => {
   if (category.dataset.filter === "staff") {
-    category.classList.add("active")
+    category.classList.add("active");
   }
 
   category.addEventListener("click", () => {
-    categories.forEach(c => c.classList.remove("active"))
-    category.classList.add("active")
-    const filter = category.dataset.filter
-    renderProjects(filter)
-  })
-})
+    categories.forEach(c => c.classList.remove("active"));
+    category.classList.add("active");
+    renderProjects(category.dataset.filter);
+  });
+});
 
-closeModal.onclick = () => modal.style.display = "none"
-
-window.onclick = (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none"
-  }
-}
+// ─── Init ─────────────────────────────────────────────────
+renderProjects("staff");
