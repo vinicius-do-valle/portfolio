@@ -1,3 +1,4 @@
+/* ─── PROJECTS DATA (seus dados reais) ───────────────────── */
 const projects = [
   {
     title: "Volleyball Legends (2.00M+ Members)",
@@ -191,83 +192,207 @@ const projects = [
   },
 ];
 
-// ─── DOM refs ─────────────────────────────────────────────
-const container    = document.getElementById("projects-container");
-const categories   = document.querySelectorAll(".category");
-const modal        = document.getElementById("project-modal");
-const modalImage   = document.getElementById("modal-image");
-const modalTitle   = document.getElementById("modal-title");
-const modalDesc    = document.getElementById("modal-description");
-const modalLink    = document.getElementById("modal-link");
-const closeModalBtn = document.querySelector(".close-modal");
+/* ─── RENDER PROJECTS ─────────────────────────────────── */
+const container = document.getElementById('projects-container');
+const modal     = document.getElementById('project-modal');
+const modalImg  = document.getElementById('modal-image');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc  = document.getElementById('modal-description');
+const modalLink  = document.getElementById('modal-link');
+const modalTag   = document.getElementById('modal-tag');
 
-// ─── Render ───────────────────────────────────────────────
 function renderProjects(filter) {
-  container.innerHTML = "";
+  container.innerHTML = '';
 
-  const filtered = projects.filter(p => p.category === filter);
+  const filtered = filter === 'all'
+    ? projects
+    : projects.filter(p => p.category === filter);
 
   if (filtered.length === 0) {
-    container.innerHTML = `<p style="color:var(--text-muted);grid-column:1/-1">No projects yet.</p>`;
+    container.innerHTML = `<p style="color:var(--ink3);grid-column:1/-1;padding:40px 0">No projects yet.</p>`;
     return;
   }
 
-  filtered.forEach((project) => {
-    const card = document.createElement("div");
-    card.classList.add("project-card");
+  filtered.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.style.animationDelay = `${i * 0.07}s`;
+
+    // tag label based on category
+    const tagMap = { staff: 'Staff', translator: 'Translator', programs: 'Programs' };
+    const tag = tagMap[p.category] || p.category;
 
     card.innerHTML = `
-      <img src="${project.image}" alt="${project.title}" />
+      <div class="card-img-wrap">
+        <img src="${p.image}" alt="${p.title}" loading="lazy" />
+        <div class="card-img-overlay"></div>
+      </div>
       <div class="project-info">
-        <h3>${project.title}</h3>
-        <p>${project.description_card}</p>
-        <button class="open-project btn-project">See Project</button>
+        <div>
+          <div class="project-tag-pill">${tag}</div>
+          <h3>${p.title}</h3>
+          <p>${p.description_card}</p>
+        </div>
+        <button class="btn-project">View Details</button>
       </div>
     `;
 
-    card.querySelector(".open-project").addEventListener("click", () => {
-      modalImage.src        = project.image;
-      modalImage.alt        = project.title;
-      modalTitle.textContent = project.title;
-      modalDesc.innerHTML   = project.description;
-      modalLink.href        = project.link;
-      // FIX: usar a classe .open que o CSS espera
-      modal.classList.add("open");
-      document.body.style.overflow = "hidden";
-    });
-
+    card.addEventListener('click', () => openModal(p, tag));
     container.appendChild(card);
   });
+
+  // re-attach cursor hover to new cards
+  attachCursorHover();
 }
 
-// ─── Fechar modal ─────────────────────────────────────────
-function closeModalFn() {
-  modal.classList.remove("open");
-  document.body.style.overflow = "";
+/* ─── MODAL ───────────────────────────────────────────── */
+function openModal(p, tag) {
+  modalImg.src              = p.image;
+  modalImg.alt              = p.title;
+  modalTitle.textContent    = p.title;
+  modalDesc.innerHTML       = p.description;
+  modalLink.href            = p.link;
+  if (modalTag) modalTag.textContent = tag || '';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-closeModalBtn.addEventListener("click", closeModalFn);
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-window.addEventListener("click", (e) => {
-  if (e.target === modal) closeModalFn();
-});
+document.querySelector('.modal-close').addEventListener('click', closeModal);
+document.querySelector('.modal-backdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeModalFn();
-});
+/* ─── FILTER TABS ─────────────────────────────────────── */
+// HTML usa .cat-btn com data-filter; suporta também .category do HTML antigo
+document.querySelectorAll('.cat-btn, .category').forEach(btn => {
+  // default: mostrar staff
+  if (btn.dataset.filter === 'staff') btn.classList.add('active');
+  else btn.classList.remove('active');
 
-// ─── Filtros ──────────────────────────────────────────────
-categories.forEach(category => {
-  if (category.dataset.filter === "staff") {
-    category.classList.add("active");
-  }
-
-  category.addEventListener("click", () => {
-    categories.forEach(c => c.classList.remove("active"));
-    category.classList.add("active");
-    renderProjects(category.dataset.filter);
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn, .category').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProjects(btn.dataset.filter);
   });
 });
 
-// ─── Init ─────────────────────────────────────────────────
-renderProjects("staff");
+// Init com staff
+renderProjects('staff');
+
+/* ─── HEADER SCROLL ──────────────────────────────────── */
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+/* ─── ACTIVE NAV LINK ────────────────────────────────── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+sections.forEach(s => navObserver.observe(s));
+
+/* ─── SCROLL REVEAL ──────────────────────────────────── */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = `${i * 0.06}s`;
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
+
+/* ─── CUSTOM CURSOR ──────────────────────────────────── */
+const cursorDot  = document.querySelector('.cursor-dot');
+const cursorRing = document.querySelector('.cursor-ring');
+
+let mouseX = 0, mouseY = 0;
+let ringX  = 0, ringY  = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top  = mouseY + 'px';
+}, { passive: true });
+
+(function animateRing() {
+  ringX += (mouseX - ringX) * 0.14;
+  ringY += (mouseY - ringY) * 0.14;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top  = ringY + 'px';
+  requestAnimationFrame(animateRing);
+})();
+
+function attachCursorHover() {
+  document.querySelectorAll('a, button, .project-card, .contact-card, .tag, .sg-pills span, .cat-btn, .category').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+}
+attachCursorHover();
+
+document.addEventListener('mouseleave', () => {
+  cursorDot.style.opacity  = '0';
+  cursorRing.style.opacity = '0';
+});
+document.addEventListener('mouseenter', () => {
+  cursorDot.style.opacity  = '1';
+  cursorRing.style.opacity = '1';
+});
+
+/* ─── PARALLAX ORBS ──────────────────────────────────── */
+document.addEventListener('mousemove', e => {
+  const cx = window.innerWidth  / 2;
+  const cy = window.innerHeight / 2;
+  const dx = (e.clientX - cx) / cx;
+  const dy = (e.clientY - cy) / cy;
+  const orb1 = document.querySelector('.orb-1');
+  const orb2 = document.querySelector('.orb-2');
+  if (orb1) orb1.style.transform = `translate(${dx * 20}px, ${dy * 20}px)`;
+  if (orb2) orb2.style.transform = `translate(${dx * -12}px, ${dy * -12}px)`;
+}, { passive: true });
+
+/* ─── HERO PARALLAX ──────────────────────────────────── */
+const heroTitle = document.querySelector('.hero-title');
+window.addEventListener('scroll', () => {
+  const progress = Math.min(window.scrollY / window.innerHeight, 1);
+  if (heroTitle) {
+    heroTitle.style.opacity   = 1 - progress * 0.6;
+    heroTitle.style.transform = `translateY(${progress * -30}px)`;
+  }
+}, { passive: true });
+
+/* ─── MODAL DESCRIPTION STYLES ───────────────────────── */
+// injeta estilos para o HTML interno do modal (subtítulo e lista)
+const modalStyles = document.createElement('style');
+modalStyles.textContent = `
+  #modal-description p { margin-bottom: 12px; }
+  #modal-description .modal-subtitle {
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    margin: 16px 0 8px; letter-spacing: 0.01em;
+  }
+  #modal-description ul {
+    padding-left: 18px; display: flex; flex-direction: column; gap: 6px;
+  }
+  #modal-description ul li {
+    font-size: 13px; color: var(--ink3); line-height: 1.65; font-weight: 300;
+  }
+`;
+document.head.appendChild(modalStyles);

@@ -1,185 +1,278 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xeva's Portfolio</title>
+<title>Xeva — Developer & Creator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
+<!-- CURSOR -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- HEADER -->
 <header id="site-header">
-  <nav>
-    <a href="#inicio">Home</a>
-    <a href="#sobre">About</a>
-    <a href="#projetos">Projects</a>
-    <a href="#hire">Hire Me</a>
-  </nav>
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">X<span>.</span></a>
+    <nav>
+      <a href="#inicio" class="nav-link">Home</a>
+      <a href="#sobre" class="nav-link">About</a>
+      <a href="#projetos" class="nav-link">Projects</a>
+      <a href="#hire" class="nav-link">Hire Me</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#hire" class="btn-nav">Let's Talk →</a>
+    </div>
+  </div>
 </header>
 
 <!-- HERO -->
 <section id="inicio" class="hero">
+  <!-- floating ambient orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
   <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-badge">
-        <span class="dot"></span>
+    <div class="hero-left">
+      <div class="hero-badge reveal">
+        <span class="badge-pulse"></span>
         Available for work
       </div>
-      <h1>
-        Hello! <span class="name">Xeva</span><br>
-        is here! <span class="wave">👋</span>
+
+      <h1 class="hero-title reveal-up">
+        <span class="line-wrap"><span class="line">Hello, I'm</span></span>
+        <span class="line-wrap name-wrap"><span class="line name-big">Xeva</span><span class="wave-emoji"></span></span>
       </h1>
-      <p>Developer, Translator, and Community Manager with over 6 years of experience building communities and shipping projects.</p>
-      <div class="hero-actions">
-        <a href="#projetos" class="btn-primary">See Projects →</a>
-        <a href="#hire" class="btn-secondary">Get in Touch</a>
+
+      <p class="hero-sub reveal-up delay-1">Developer, Translator & Community Manager with over <strong>6 years</strong> of experience building communities and shipping meaningful projects.</p>
+
+      <div class="hero-actions reveal-up delay-2">
+        <a href="#projetos" class="btn-primary">
+          <span>See Projects</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#hire" class="btn-ghost">Get in Touch</a>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number">6<span>+</span></div>
-          <div class="stat-label">Years exp.</div>
+
+      <div class="hero-stats reveal-up delay-3">
+        <div class="stat">
+          <div class="stat-val">6<em> +</em></div>
+          <div class="stat-key">Years exp.</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">3<span>M+</span></div>
-          <div class="stat-label">Community members</div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="stat-val">3M<em> +</em></div>
+          <div class="stat-key">Community members</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">7<span>+</span></div>
-          <div class="stat-label">Languages</div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="stat-val">7<em> +</em></div>
+          <div class="stat-key">Languages</div>
         </div>
       </div>
     </div>
-    <div class="hero-avatar-wrap">
-      <div class="hero-avatar-ring"></div>
-      <img class="hero-avatar" src="https://i.pinimg.com/1200x/f7/76/4c/f7764c3bbb161d2a070ea9d3b4f2517d.jpg" alt="Xeva" />
+
+    <div class="hero-right reveal-scale">
+      <div class="avatar-frame">
+        <div class="avatar-bg-ring ring-1"></div>
+        <div class="avatar-bg-ring ring-2"></div>
+        <div class="avatar-bg-ring ring-3"></div>
+        <img class="avatar-img" src="https://i.pinimg.com/1200x/f7/76/4c/f7764c3bbb161d2a070ea9d3b4f2517d.jpg" alt="Xeva" />
+        <div class="avatar-badge-float">
+          <span class="dot-live"></span> Open to work
+        </div>
+      </div>
+
+      <!-- floating skill tags -->
+      <div class="skill-float skill-float-1">JavaScript</div>
+      <div class="skill-float skill-float-2">Python</div>
+      <div class="skill-float skill-float-3">3M+ Members</div>
     </div>
+  </div>
+
+  <!-- scroll hint -->
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<!-- MARQUEE STRIP -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>JavaScript</span><span class="dot-sep">✦</span>
+    <span>Python</span><span class="dot-sep">✦</span>
+    <span>Java</span><span class="dot-sep">✦</span>
+    <span>C / C++ / C#</span><span class="dot-sep">✦</span>
+    <span>Lua</span><span class="dot-sep">✦</span>
+    <span>TypeScript</span><span class="dot-sep">✦</span>
+    <span>HTML & CSS</span><span class="dot-sep">✦</span>
+    <span>PHP</span><span class="dot-sep">✦</span>
+    <span>Translation</span><span class="dot-sep">✦</span>
+    <span>Community Mgmt</span><span class="dot-sep">✦</span>
+    <span>Journalism</span><span class="dot-sep">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>JavaScript</span><span class="dot-sep">✦</span>
+    <span>Python</span><span class="dot-sep">✦</span>
+    <span>Java</span><span class="dot-sep">✦</span>
+    <span>C / C++ / C#</span><span class="dot-sep">✦</span>
+    <span>Lua</span><span class="dot-sep">✦</span>
+    <span>TypeScript</span><span class="dot-sep">✦</span>
+    <span>HTML & CSS</span><span class="dot-sep">✦</span>
+    <span>PHP</span><span class="dot-sep">✦</span>
+    <span>Translation</span><span class="dot-sep">✦</span>
+    <span>Community Mgmt</span><span class="dot-sep">✦</span>
+    <span>Journalism</span><span class="dot-sep">✦</span>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section id="sobre" class="about">
-  <div class="about-container">
-    <div class="about-text">
-      <div class="section-label">About me</div>
-      <h2>More than just a developer</h2>
-      <p>Hey there! I'm Xeeeva. I'm a translator, programmer, journalist, developer, and much more. This portfolio gives a glimpse into my work, skills, and experience across technology, community management, and content creation.</p>
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="section-eyebrow scroll-reveal">About me</div>
+      <h2 class="section-title scroll-reveal">More than just<br><em>a developer</em></h2>
+      <p class="about-body scroll-reveal">Hey there! I'm Xeeeva. I'm a translator, programmer, journalist, developer, and much more. This portfolio gives a glimpse into my work, skills, and experience across technology, community management, and content creation.</p>
+
+      <div class="about-tags scroll-reveal">
+        <span class="tag">Builder</span>
+        <span class="tag">Translator</span>
+        <span class="tag">Journalist</span>
+        <span class="tag">Community Lead</span>
+      </div>
     </div>
-    <div class="about-card">
-      <div class="card-content">
-        <h3>Skills & Expertise</h3>
-        <ul>
-          <li>
-            <strong>Programming Languages</strong>
-            JavaScript, Java, Python, C, C#, C++, Lua
-          </li>
-          <li>
-            <strong>Web Development</strong>
-            HTML, CSS, TypeScript, PHP
-          </li>
-          <li>
-            <strong>Community Management</strong>
-            Discord Server Management (3.0M+ Members)
-          </li>
-          <li>
-            <strong>Other Skills</strong>
-            Translation, Project Development, Journalism
-          </li>
-        </ul>
+
+    <div class="about-right">
+      <div class="skills-card scroll-reveal">
+        <div class="skills-card-header">
+          <span class="skills-label">Skills & Expertise</span>
+          <span class="skills-count">11 technologies</span>
+        </div>
+        <div class="skill-group">
+          <div class="sg-title">Programming Languages</div>
+          <div class="sg-pills">
+            <span>JavaScript</span><span>Java</span><span>Python</span><span>C</span><span>C#</span><span>C++</span><span>Lua</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="sg-title">Web Development</div>
+          <div class="sg-pills">
+            <span>HTML</span><span>CSS</span><span>TypeScript</span><span>PHP</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="sg-title">Community Management</div>
+          <div class="sg-pills large">
+            <span>Discord — 3M+ Members</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="sg-title">Other Skills</div>
+          <div class="sg-pills">
+            <span>Translation</span><span>Project Dev</span><span>Journalism</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <!-- PROJECTS -->
 <section id="projetos" class="projects">
-  <div class="projects-header">
+  <div class="projects-top">
     <div>
-      <div class="section-label">Work</div>
-      <h2>Projects</h2>
+      <div class="section-eyebrow scroll-reveal">Work</div>
+      <h2 class="section-title scroll-reveal">Featured<br><em>Projects</em></h2>
     </div>
-    <div class="project-categories">
-      <span class="category" data-filter="staff">Staff</span>
-      <span class="category" data-filter="translator">Translator</span>
-      <span class="category" data-filter="programs">Programs</span>
+    <div class="project-categories scroll-reveal">
+      <button class="cat-btn active" data-filter="all">All</button>
+      <button class="cat-btn" data-filter="staff">Staff</button>
+      <button class="cat-btn" data-filter="translator">Translator</button>
+      <button class="cat-btn" data-filter="programs">Programs</button>
     </div>
   </div>
+
   <div class="projects-grid" id="projects-container"></div>
 </section>
 
-<div class="section-divider"></div>
-
 <!-- HIRE -->
 <section id="hire" class="hire">
+  <div class="hire-bg-text">HIRE</div>
   <div class="hire-inner">
-    <div class="section-label" style="justify-content:center">Contact</div>
-    <h2>Want to <em>hire me?</em></h2>
-    <p>Feel free to reach out through any of the following platforms. I'll get back to you as soon as possible!</p>
-    <div class="contact-links">
-      <div class="contact-item">
-        <div class="contact-icon">💬</div>
-        <div>
-          <h3>Discord</h3>
-          <p>@xeeeva</p>
+    <div class="section-eyebrow scroll-reveal" style="justify-content:center">Contact</div>
+    <h2 class="hire-title scroll-reveal">Let's build something<br><em>incredible together</em></h2>
+    <p class="hire-sub scroll-reveal">Feel free to reach out through any of the following platforms. I'll get back to you as soon as possible!</p>
+
+    <div class="contact-row scroll-reveal">
+      <a href="https://discord.com/users/455050718496161802" class="contact-card" target="_blank">
+        <div class="cc-icon">💬</div>
+        <div class="cc-info">
+          <strong>Discord</strong>
+          <span>@xeeeva</span>
         </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📸</div>
-        <div>
-          <h3>Instagram</h3>
-          <p>@vinivallz</p>
+        <div class="cc-arrow">↗</div>
+      </a>
+      <a href="https://instagram.com/vinivallz" class="contact-card" target="_blank">
+        <div class="cc-icon">📸</div>
+        <div class="cc-info">
+          <strong>Instagram</strong>
+          <span>@vinivallz</span>
         </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">✉️</div>
-        <div>
-          <h3>Email</h3>
-          <p>viniciusvallerodrigues<br>@gmail.com</p>
+        <div class="cc-arrow">↗</div>
+      </a>
+      <a href="mailto:viniciusvallerodrigues@gmail.com" class="contact-card">
+        <div class="cc-icon">✉️</div>
+        <div class="cc-info">
+          <strong>Email</strong>
+          <span>viniciusvallerodrigues@gmail.com</span>
         </div>
-      </div>
+        <div class="cc-arrow">↗</div>
+      </a>
     </div>
-    <a href="https://discord.com/users/455050718496161802" class="btn-primary" target="_blank">
-      Get in Touch →
+
+    <a href="https://discord.com/users/455050718496161802" class="btn-primary btn-big scroll-reveal" target="_blank">
+      <span>Get in Touch</span>
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 <span class="footer-accent">Xeva</span></p>
-  <p>Built with care ✦</p>
+  <p class="footer-left">© 2026 <span class="foot-accent">Xeva</span></p>
+  <p class="footer-center">Built with care ✦</p>
+  <div class="footer-right">
+    <a href="https://discord.com/users/455050718496161802" target="_blank">Discord</a>
+    <a href="https://instagram.com/vinivallz" target="_blank">Instagram</a>
+  </div>
 </footer>
 
 <!-- MODAL -->
 <div id="project-modal">
+  <div class="modal-backdrop"></div>
   <div class="modal-content">
-    <span class="close-modal">&times;</span>
+    <button class="modal-close" aria-label="Close">&times;</button>
     <div class="modal-img-wrap">
       <img id="modal-image" src="" alt="" />
+      <div class="modal-img-overlay"></div>
     </div>
     <div class="modal-body">
+      <div class="modal-tag" id="modal-tag"></div>
       <h2 id="modal-title"></h2>
       <p id="modal-description"></p>
-      <a id="modal-link" class="btn-modal" href="#" target="_blank">See Project →</a>
+      <a id="modal-link" class="btn-primary" href="#" target="_blank">
+        <span>See Project</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </div>
-
-<!-- header scroll script inline -->
-<script>
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 30);
-  });
-</script>
 
 <script src="js/script.js" defer></script>
 </body>
