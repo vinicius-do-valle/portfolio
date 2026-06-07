@@ -1,3 +1,24 @@
+/*
+===============================================================================
+ Project Authorship Notice
+-------------------------------------------------------------------------------
+
+ This project, including its HTML structure, CSS styling, JavaScript logic,
+ architecture, and implementation, was originally conceived, designed,
+ developed, and maintained by Xeeeva (Vinicius Valle Rodrigues).
+
+ All source code, technical solutions, system architecture, visual design,
+ and associated implementations contained within this project constitute
+ original work by the author unless explicitly stated otherwise.
+
+ Attribution to the original author should be preserved in all copies,
+ modifications, distributions, and derivative works of this codebase.
+
+ Copyright © 2026 Xeeeva (Vinicius Valle Rodrigues). All Rights Reserved.
+
+===============================================================================
+*/
+
 const projects = [
   {
     title: "Volleyball Legends (2.00M+ Members)",
