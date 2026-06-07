@@ -94,7 +94,7 @@ body::after {
   background: var(--ink);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 999999;
   transform: translate(-50%, -50%);
   transition: transform 0.1s, opacity 0.2s;
   mix-blend-mode: multiply;
@@ -105,7 +105,7 @@ body::after {
   border: 1.5px solid rgba(0,0,0,0.25);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 999  999;
   transform: translate(-50%, -50%);
   transition: transform 0.25s var(--ease), width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.25s, opacity 0.3s;
 }
@@ -1122,7 +1122,6 @@ footer p {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 100px;
-  background: linear-gradient(to top, var(--white), transparent);
 }
 
 .modal-body { padding: 32px 36px 36px; }
@@ -1180,3 +1179,73 @@ footer p {
   .hero-stats { flex-direction: column; gap: 16px; }
   .stat-sep { width: 48px; height: 1px; }
 }
+
+/* ═══════════════════════════════════════════════════
+   SPLASH SCREEN
+═══════════════════════════════════════════════════ */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none; /* adiciona isso */
+  flex-direction: column;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+}
+#splash-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeIn 0.8s var(--ease);
+}
+
+.splash-logo {
+  font-size: 80px;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  font-style: italic;
+  line-height: 1;
+}
+.splash-logo span { color: var(--gold); }
+
+.splash-sub {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 16px;
+}
+
+#splash-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 16px 36px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer !important;
+  transition: transform 0.25s var(--spring), box-shadow 0.25s;
+  animation: fadeIn 1s var(--ease) 0.3s both;
+}
+#splash-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+#splash-btn svg { transition: transform 0.2s var(--spring); }
+#splash-btn:hover svg { transform: translateX(4px); }
+

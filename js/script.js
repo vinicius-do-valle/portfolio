@@ -387,3 +387,11 @@ modalStyles.textContent = `
   }
 `;
 document.head.appendChild(modalStyles);
+const splash    = document.getElementById('splash-screen');
+const splashBtn = document.getElementById('splash-btn');
+const music     = document.getElementById('bg-music');
+
+splashBtn.addEventListener('click', () => {
+  music.play();
+  splash.classList.add('hidden');
+});
