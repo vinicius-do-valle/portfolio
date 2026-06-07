@@ -1,4 +1,3 @@
-/* ─── PROJECTS DATA (seus dados reais) ───────────────────── */
 const projects = [
   {
     title: "Volleyball Legends (2.00M+ Members)",
@@ -15,17 +14,17 @@ const projects = [
     category: "staff"
   },
   {
-    title: "Goularte's Server (800.0K+ Members)",
-    description_card: "🔨 One of the largest YouTuber communities on Discord.",
+    title: "Robux Heaven (20.0K+)",
+    description_card: "🔨 One of the largest robux communities on Discord.",
     description: `
-      <p>The Servidor do Goularte was a massive Discord community with over 800,000 members, recognized as the largest community in Latin America for more than three years, and the largest YouTuber-led community in the world.</p>
+      <p>The Robux Heaven was a massive Discord community with over 20,000 members, recognized as one of the largest Roblox-focused communities in Brazil, bringing together players, traders, collectors, in a single active hub.</p>
       <h4 class="modal-subtitle">🛡️ My Journey</h4>
       <ul>
-        <li>I served on the Moderation Team for approximately four months, helping maintain order and safety in an extremely active and diverse environment. Unfortunately, I stepped away from the team due to circumstances related to accusations involving the creator of the community.</li>
+        <li>I served on the Moderation Team for approximately four months. I later left the team due to external reasons unrelated to my work as a moderator..</li>
       </ul>
     `,
-    image: "https://dbl-discord.usercontent.prism.gg/icons/311627659828527104/a_ef951d646f2f5c3112de4f8c7102a9c3.png?size=256",
-    link: "https://discord.gg/gou",
+    image: "https://cdn.discordapp.com/icons/1334663726456115200/891244d2a82b63a21ae388202e462665?size=48",
+    link: "https://discord.gg/robuxheaven",
     category: "staff"
   },
   {
@@ -192,7 +191,6 @@ const projects = [
   },
 ];
 
-/* ─── RENDER PROJECTS ─────────────────────────────────── */
 const container = document.getElementById('projects-container');
 const modal     = document.getElementById('project-modal');
 const modalImg  = document.getElementById('modal-image');
@@ -241,11 +239,9 @@ function renderProjects(filter) {
     container.appendChild(card);
   });
 
-  // re-attach cursor hover to new cards
   attachCursorHover();
 }
 
-/* ─── MODAL ───────────────────────────────────────────── */
 function openModal(p, tag) {
   modalImg.src              = p.image;
   modalImg.alt              = p.title;
@@ -266,10 +262,7 @@ document.querySelector('.modal-close').addEventListener('click', closeModal);
 document.querySelector('.modal-backdrop').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ─── FILTER TABS ─────────────────────────────────────── */
-// HTML usa .cat-btn com data-filter; suporta também .category do HTML antigo
 document.querySelectorAll('.cat-btn, .category').forEach(btn => {
-  // default: mostrar staff
   if (btn.dataset.filter === 'staff') btn.classList.add('active');
   else btn.classList.remove('active');
 
@@ -280,16 +273,13 @@ document.querySelectorAll('.cat-btn, .category').forEach(btn => {
   });
 });
 
-// Init com staff
 renderProjects('staff');
 
-/* ─── HEADER SCROLL ──────────────────────────────────── */
 const header = document.getElementById('site-header');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 30);
 }, { passive: true });
 
-/* ─── ACTIVE NAV LINK ────────────────────────────────── */
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -305,7 +295,6 @@ const navObserver = new IntersectionObserver(entries => {
 
 sections.forEach(s => navObserver.observe(s));
 
-/* ─── SCROLL REVEAL ──────────────────────────────────── */
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -318,7 +307,6 @@ const revealObserver = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
 
-/* ─── CUSTOM CURSOR ──────────────────────────────────── */
 const cursorDot  = document.querySelector('.cursor-dot');
 const cursorRing = document.querySelector('.cursor-ring');
 
@@ -357,7 +345,6 @@ document.addEventListener('mouseenter', () => {
   cursorRing.style.opacity = '1';
 });
 
-/* ─── PARALLAX ORBS ──────────────────────────────────── */
 document.addEventListener('mousemove', e => {
   const cx = window.innerWidth  / 2;
   const cy = window.innerHeight / 2;
@@ -369,7 +356,6 @@ document.addEventListener('mousemove', e => {
   if (orb2) orb2.style.transform = `translate(${dx * -12}px, ${dy * -12}px)`;
 }, { passive: true });
 
-/* ─── HERO PARALLAX ──────────────────────────────────── */
 const heroTitle = document.querySelector('.hero-title');
 window.addEventListener('scroll', () => {
   const progress = Math.min(window.scrollY / window.innerHeight, 1);
@@ -379,8 +365,6 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-/* ─── MODAL DESCRIPTION STYLES ───────────────────────── */
-// injeta estilos para o HTML interno do modal (subtítulo e lista)
 const modalStyles = document.createElement('style');
 modalStyles.textContent = `
   #modal-description p { margin-bottom: 12px; }
