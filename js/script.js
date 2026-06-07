@@ -35,20 +35,6 @@ const projects = [
     category: "staff"
   },
   {
-    title: "Robux Heaven (20.0K+)",
-    description_card: "🔨 One of the largest robux communities on Discord.",
-    description: `
-      <p>The Robux Heaven was a massive Discord community with over 20,000 members, recognized as one of the largest Roblox-focused communities in Brazil, bringing together players, traders, collectors, in a single active hub.</p>
-      <h4 class="modal-subtitle">🛡️ My Journey</h4>
-      <ul>
-        <li>I served on the Moderation Team for approximately four months. I later left the team due to external reasons unrelated to my work as a moderator..</li>
-      </ul>
-    `,
-    image: "https://cdn.discordapp.com/icons/1334663726456115200/891244d2a82b63a21ae388202e462665?size=48",
-    link: "https://discord.gg/robuxheaven",
-    category: "staff"
-  },
-  {
     title: "IT'S A TRAP (350.0K+ Members)",
     description_card: "🔨 One of the largest Brazilian YouTuber communities on Discord.",
     description: `
