@@ -35,10 +35,33 @@ const ROBLOX_GAMES = [
   { universeId: '10208988072', label: 'Evade Lander'       },
 ];
 
+// ── Cache keys ────────────────────────────────────────────────────
+const CACHE_KEY_DISCORD = 'xeva_discord_cache';
+const CACHE_KEY_ROBLOX  = 'xeva_roblox_cache';
+
 // live data cache
 let discordData = [];
 let robloxData  = [];
 
+// ── localStorage helpers ──────────────────────────────────────────
+function saveCache(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data }));
+  } catch (_) {}
+}
+
+function loadCache(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? null;
+  } catch (_) {
+    return null;
+  }
+}
+
+// ── Format helpers ────────────────────────────────────────────────
 function fmtBig(n) {
   if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1).replace('.0', '') + 'B';
   if (n >= 1_000_000)     return (n / 1_000_000).toFixed(1).replace('.0', '') + 'M';
@@ -46,8 +69,56 @@ function fmtBig(n) {
   return n.toLocaleString();
 }
 
+function fmtMembersShort(n) {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace('.0', '') + 'M';
+  if (n >= 1_000)     return Math.round(n / 1_000) + 'K';
+  return String(n);
+}
+
+// ── Atualiza TODOS os pontos de exibição de dados dinâmicos ──────
+//
+// Pontos que são atualizados automaticamente:
+//   1. #stat-members          → stat card "Discord members"
+//   2. #stat-servers          → stat card "Servers"
+//   3. .hero-stat-members     → hero stats "2.5M+"
+//   4. .skill-float-3         → floating tag "2.5M+ Members"
+//   5. .hero-stat-servers     → hero stats de servidores (se existir)
+//   6. popovers               → detalhamento por servidor/jogo
+//
+function applyStats(totalMembers, totalServers) {
+  // ── 1. Stat card members ─────────────────────────────────────
+  const elMembers = document.getElementById('stat-members');
+  if (elMembers && !elMembers.dataset.animating) {
+    elMembers.innerHTML = fmtMembersShort(totalMembers) + '<em>+</em>';
+  }
+
+  // ── 2. Stat card servers ─────────────────────────────────────
+  const elServers = document.getElementById('stat-servers');
+  if (elServers && !elServers.dataset.animating) {
+    elServers.innerHTML = totalServers + '<em>+</em>';
+  }
+
+  // ── 3. Hero stat — members ───────────────────────────────────
+  //    <div class="stat-val hero-stat-members">
+  document.querySelectorAll('.hero-stat-members').forEach(el => {
+    el.innerHTML = fmtMembersShort(totalMembers) + '<em> +</em>';
+  });
+
+  // ── 4. Floating skill tag ────────────────────────────────────
+  //    <div class="skill-float skill-float-3">2.5M+ Members</div>
+  document.querySelectorAll('.skill-float-3').forEach(el => {
+    el.textContent = fmtMembersShort(totalMembers) + '+ Members';
+  });
+
+  // ── 5. Hero stat — servers (caso exista no HTML) ─────────────
+  document.querySelectorAll('.hero-stat-servers').forEach(el => {
+    el.innerHTML = totalServers + '<em> +</em>';
+  });
+}
+
 // ── animateCount ─────────────────────────────────────────────────
 function animateCount(el, target) {
+  el.dataset.animating = '1';
   const duration = 1800;
   const start = performance.now();
 
@@ -64,24 +135,32 @@ function animateCount(el, target) {
       el.innerHTML = current + '<em>+</em>';
     }
 
-    if (progress < 1) requestAnimationFrame(update);
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      delete el.dataset.animating;
+    }
   }
 
   requestAnimationFrame(update);
 }
 
-function observeStats() {
+function observeStats(totalMembers, totalServers) {
   const statObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         statObserver.unobserve(entry.target);
-        const raw = entry.target.dataset.target;
-        if (raw) animateCount(entry.target, Number(raw));
+        const el = entry.target;
+        if (el.id === 'stat-members') animateCount(el, totalMembers);
+        if (el.id === 'stat-servers') animateCount(el, totalServers);
       }
     });
   }, { threshold: 0.3 });
 
-  document.querySelectorAll('[data-target]').forEach(el => statObserver.observe(el));
+  const elMembers = document.getElementById('stat-members');
+  const elServers = document.getElementById('stat-servers');
+  if (elMembers) statObserver.observe(elMembers);
+  if (elServers) statObserver.observe(elServers);
 }
 
 // ── Discord fetch ─────────────────────────────────────────────────
@@ -95,6 +174,7 @@ async function fetchDiscord() {
     )
   );
   discordData = results;
+  saveCache(CACHE_KEY_DISCORD, results);
   return results;
 }
 
@@ -112,40 +192,65 @@ async function fetchRoblox() {
       const match = data.data.find(d => String(d.id) === g.universeId);
       return {
         label:   g.label,
-        visits:  match?.visits       ?? 0,
-        playing: match?.playing      ?? 0,
+        visits:  match?.visits  ?? 0,
+        playing: match?.playing ?? 0,
       };
     });
   } catch {
     robloxData = ROBLOX_GAMES.map(g => ({ label: g.label, visits: 0, playing: 0 }));
   }
+  saveCache(CACHE_KEY_ROBLOX, robloxData);
   return robloxData;
 }
 
-// ── Load all stats ────────────────────────────────────────────────
+// ── Inicializa stats com cache e depois puxa API ──────────────────
 async function loadStats() {
-  const elMembers = document.getElementById('stat-members');
-  const elServers = document.getElementById('stat-servers');
+  // 1. Carrega cache imediatamente — sem "—"
+  const cachedDiscord = loadCache(CACHE_KEY_DISCORD);
+  const cachedRoblox  = loadCache(CACHE_KEY_ROBLOX);
 
+  if (cachedDiscord) {
+    discordData = cachedDiscord;
+    const total = discordData.reduce((a, b) => a + b.members, 0);
+    applyStats(total, STAT_INVITES.length);
+    updatePopovers();
+  }
+
+  if (cachedRoblox) {
+    robloxData = cachedRoblox;
+    updatePopovers();
+  }
+
+  // Se não havia cache, mostra placeholder amigável em vez de "—"
+  if (!cachedDiscord) {
+    const elMembers = document.getElementById('stat-members');
+    const elServers = document.getElementById('stat-servers');
+    if (elMembers) elMembers.innerHTML = '2.5M<em>+</em>';
+    if (elServers) elServers.innerHTML = STAT_INVITES.length + '<em>+</em>';
+    applyStats(2_500_000, STAT_INVITES.length);
+  }
+
+  // 2. Puxa dados frescos da API em paralelo
   const [discord, roblox] = await Promise.all([fetchDiscord(), fetchRoblox()]);
 
   const totalMembers = discord.reduce((a, b) => a + b.members, 0);
+  const totalServers = STAT_INVITES.length;
 
-  if (elServers) elServers.dataset.target = STAT_INVITES.length;
-  if (elMembers) elMembers.dataset.target = totalMembers;
-
-  observeStats();
+  // Atualiza todos os pontos de exibição com dados reais
+  applyStats(totalMembers, totalServers);
   updatePopovers();
+
+  // Dispara animação de contagem nos stat cards (seção Impact)
+  observeStats(totalMembers, totalServers);
 }
 
-// ── Auto refresh every 60s ────────────────────────────────────────
+// ── Auto refresh a cada 60s ───────────────────────────────────────
 async function refreshStats() {
   await Promise.all([fetchDiscord(), fetchRoblox()]);
-  updatePopovers();
 
-  const elMembers = document.getElementById('stat-members');
-  const total = discordData.reduce((a, b) => a + b.members, 0);
-  if (elMembers) elMembers.innerHTML = (total / 1_000_000).toFixed(1).replace('.0', '') + 'M<em>+</em>';
+  const totalMembers = discordData.reduce((a, b) => a + b.members, 0);
+  applyStats(totalMembers, STAT_INVITES.length);
+  updatePopovers();
 }
 
 setInterval(refreshStats, 60_000);
