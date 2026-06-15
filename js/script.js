@@ -114,6 +114,11 @@ function applyStats(totalMembers, totalServers) {
   document.querySelectorAll('.hero-stat-servers').forEach(el => {
     el.innerHTML = totalServers + '<em> +</em>';
   });
+
+  // ── 6. Skills card — pill "Discord — X Members" ───────────────
+  document.querySelectorAll('.skill-discord-pill').forEach(el => {
+    el.textContent = `Discord — ${fmtMembersShort(totalMembers)}+ Members`;
+  });
 }
 
 // ── animateCount ─────────────────────────────────────────────────
@@ -722,16 +727,7 @@ document.addEventListener('mouseenter', () => {
   cursorRing.style.opacity = '1';
 });
 
-document.addEventListener('mousemove', e => {
-  const cx = window.innerWidth  / 2;
-  const cy = window.innerHeight / 2;
-  const dx = (e.clientX - cx) / cx;
-  const dy = (e.clientY - cy) / cy;
-  const orb1 = document.querySelector('.orb-1');
-  const orb2 = document.querySelector('.orb-2');
-  if (orb1) orb1.style.transform = `translate(${dx * 20}px, ${dy * 20}px)`;
-  if (orb2) orb2.style.transform = `translate(${dx * -12}px, ${dy * -12}px)`;
-}, { passive: true });
+// orb parallax movido para o animation layer (suavizado com lerp)
 
 const heroTitle = document.querySelector('.hero-title');
 window.addEventListener('scroll', () => {
@@ -769,3 +765,213 @@ splashBtn.addEventListener('click', () => {
   splash.classList.add('hidden');
   document.body.style.overflow = '';
 });
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATION LAYER — adicionado sobre o script original
+   Não modifica nenhuma funcionalidade existente, apenas estende.
+═══════════════════════════════════════════════════════════════════ */
+
+// ── 1. CHAR STAGGER no título hero ────────────────────────────────
+// Quebra "Xeva" letra por letra com delay individual
+(function splitHeroTitle() {
+  const nameBig = document.querySelector('.name-big');
+  if (!nameBig) return;
+
+  const text = nameBig.textContent;
+  nameBig.textContent = '';
+
+  text.split('').forEach((char, i) => {
+    const span = document.createElement('span');
+    span.className = 'char';
+    span.textContent = char === ' ' ? '\u00a0' : char;
+    span.style.animationDelay = `${0.28 + i * 0.08}s`;
+    nameBig.appendChild(span);
+  });
+})();
+
+// ── 2. RIPPLE nos botões ───────────────────────────────────────────
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.btn-primary, .btn-ghost, .btn-nav, #splash-btn');
+  if (!btn) return;
+
+  const rect   = btn.getBoundingClientRect();
+  const size   = Math.max(rect.width, rect.height) * 1.6;
+  const x      = e.clientX - rect.left - size / 2;
+  const y      = e.clientY - rect.top  - size / 2;
+
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+  btn.appendChild(ripple);
+
+  ripple.addEventListener('animationend', () => ripple.remove());
+}, { passive: true });
+
+// ── 3. STAGGER nos filhos de seções ───────────────────────────────
+// Adiciona a classe stagger-children nos grupos de cards/pills
+(function setupStagger() {
+  const targets = [
+    '.stats-cards',
+    '.contact-row',
+    '.about-tags',
+    '.hero-actions',
+    '.sg-pills',
+    '.project-categories',
+  ];
+
+  targets.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      el.classList.add('stagger-children');
+    });
+  });
+
+  // Observer para ativar quando entrar na viewport
+  const staggerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        staggerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.stagger-children').forEach(el => {
+    staggerObserver.observe(el);
+  });
+})();
+
+// ── 4. SCROLL REVEAL com direções alternadas ──────────────────────
+// About: esquerda entra da esquerda, direita entra da direita
+(function setupDirectionalReveals() {
+  const leftSide  = document.querySelector('.about-left');
+  const rightSide = document.querySelector('.about-right');
+  if (leftSide)  leftSide.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('from-left'));
+  if (rightSide) rightSide.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('from-right'));
+})();
+
+// ── 5. PARALLAX leve nas orbs do hero ─────────────────────────────
+// (já existe no script original via mousemove — apenas suaviza)
+(function smoothOrbs() {
+  let orbTargetX = 0, orbTargetY = 0;
+  let orbCurrentX = 0, orbCurrentY = 0;
+
+  document.addEventListener('mousemove', e => {
+    const cx = window.innerWidth  / 2;
+    const cy = window.innerHeight / 2;
+    orbTargetX = (e.clientX - cx) / cx;
+    orbTargetY = (e.clientY - cy) / cy;
+  }, { passive: true });
+
+  (function animateOrbs() {
+    orbCurrentX += (orbTargetX - orbCurrentX) * 0.05;
+    orbCurrentY += (orbTargetY - orbCurrentY) * 0.05;
+
+    const orb1 = document.querySelector('.orb-1');
+    const orb2 = document.querySelector('.orb-2');
+    const orb3 = document.querySelector('.orb-3');
+    if (orb1) orb1.style.transform = `translate(${orbCurrentX * 28}px, ${orbCurrentY * 28}px)`;
+    if (orb2) orb2.style.transform = `translate(${orbCurrentX * -16}px, ${orbCurrentY * -16}px)`;
+    if (orb3) orb3.style.transform = `translate(${orbCurrentX * 12}px, ${orbCurrentY * -12}px)`;
+
+    requestAnimationFrame(animateOrbs);
+  })();
+})();
+
+// ── 6. TILT 3D suave nos project cards ────────────────────────────
+(function setupCardTilt() {
+  function applyTilt(card) {
+    card.addEventListener('mousemove', e => {
+      const rect   = card.getBoundingClientRect();
+      const cx     = rect.left + rect.width  / 2;
+      const cy     = rect.top  + rect.height / 2;
+      const dx     = (e.clientX - cx) / (rect.width  / 2);
+      const dy     = (e.clientY - cy) / (rect.height / 2);
+      const rotateX = dy * -4;   // máx 4° — sutil
+      const rotateY = dx *  4;
+
+      card.style.transform = `translateY(-10px) scale(1.012) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      card.style.transition = 'transform 0.1s ease, box-shadow 0.45s, border-color 0.35s';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform  = '';
+      card.style.transition = '';
+    });
+  }
+
+  // Aplica nos cards já renderizados e nos futuros (re-render do filtro)
+  function attachTiltToCards() {
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (card.dataset.tilt) return;
+      card.dataset.tilt = '1';
+      card.style.transformStyle = 'preserve-3d';
+      applyTilt(card);
+    });
+  }
+
+  attachTiltToCards();
+
+  // Re-aplica após filtro mudar (MutationObserver no container)
+  const projectsContainer = document.getElementById('projects-container');
+  if (projectsContainer) {
+    new MutationObserver(attachTiltToCards).observe(projectsContainer, { childList: true });
+  }
+})();
+
+// ── 7. CURSOR — rastro magnético nos elementos interativos ─────────
+(function enhanceCursor() {
+  const dot  = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if (!dot || !ring) return;
+
+  // Quando hover em elementos interativos, cursor "gruda" levemente no centro
+  document.addEventListener('mouseover', e => {
+    const target = e.target.closest('a, button, .project-card, .contact-card, .stat-card, .tag, .sg-pills span');
+    if (!target) return;
+
+    const rect = target.getBoundingClientRect();
+    const cx = rect.left + rect.width  / 2;
+    const cy = rect.top  + rect.height / 2;
+
+    // Leve atração magnética — move o ring em direção ao centro do elemento
+    ring.style.transition = 'left 0.3s cubic-bezier(0.34,1.56,0.64,1), top 0.3s cubic-bezier(0.34,1.56,0.64,1), width 0.25s, height 0.25s, border-color 0.25s';
+  });
+
+  document.addEventListener('mouseout', e => {
+    const target = e.target.closest('a, button, .project-card, .contact-card, .stat-card, .tag');
+    if (!target) return;
+    ring.style.transition = '';
+  });
+})();
+
+// ── 8. NÚMERO contador no hero stat de membros ────────────────────
+// Anima quando o hero carrega, não só na seção Impact
+(function heroStatCount() {
+  const heroMembersEl = document.querySelector('.hero-stat-members');
+  if (!heroMembersEl) return;
+
+  // Aguarda 0.9s (após stagger dos stats) e anima
+  setTimeout(() => {
+    // Pega o valor atual (pode ser do cache já aplicado)
+    const raw = heroMembersEl.textContent.replace(/[^0-9.MKB]/g, '');
+    let target = 2_500_000; // fallback
+
+    if (raw.includes('M')) target = parseFloat(raw) * 1_000_000;
+    else if (raw.includes('K')) target = parseFloat(raw) * 1_000;
+    else if (!isNaN(parseFloat(raw))) target = parseFloat(raw);
+
+    const duration = 1600;
+    const start = performance.now();
+
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 4);
+      const current = Math.round(ease * target);
+      heroMembersEl.innerHTML = (current / 1_000_000).toFixed(1).replace('.0', '') + 'M<em> +</em>';
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }, 900);
+})();
