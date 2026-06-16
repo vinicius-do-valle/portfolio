@@ -50,11 +50,12 @@ function saveCache(key, data) {
   } catch (_) {}
 }
 
-function loadCache(key) {
+function loadCache(key, maxAgeMs = 5 * 60 * 1000) {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
+    if (Date.now() - parsed.ts > maxAgeMs) return null;
     return parsed.data ?? null;
   } catch (_) {
     return null;
@@ -84,6 +85,7 @@ function fmtMembersShort(n) {
 //   4. .skill-float-3         → floating tag "2.5M+ Members"
 //   5. .hero-stat-servers     → hero stats de servidores (se existir)
 //   6. popovers               → detalhamento por servidor/jogo
+//   7. .card-member-badge     → badges dinâmicas nos project cards
 //
 function applyStats(totalMembers, totalServers) {
   // ── 1. Stat card members ─────────────────────────────────────
@@ -99,13 +101,11 @@ function applyStats(totalMembers, totalServers) {
   }
 
   // ── 3. Hero stat — members ───────────────────────────────────
-  //    <div class="stat-val hero-stat-members">
   document.querySelectorAll('.hero-stat-members').forEach(el => {
     el.innerHTML = fmtMembersShort(totalMembers) + '<em> +</em>';
   });
 
   // ── 4. Floating skill tag ────────────────────────────────────
-  //    <div class="skill-float skill-float-3">2.5M+ Members</div>
   document.querySelectorAll('.skill-float-3').forEach(el => {
     el.textContent = fmtMembersShort(totalMembers) + '+ Members';
   });
@@ -119,6 +119,9 @@ function applyStats(totalMembers, totalServers) {
   document.querySelectorAll('.skill-discord-pill').forEach(el => {
     el.textContent = `Discord — ${fmtMembersShort(totalMembers)}+ Members`;
   });
+
+  // ── 7. Badges dinâmicas nos project cards ────────────────────
+  updateCardBadges();
 }
 
 // ── animateCount ─────────────────────────────────────────────────
@@ -183,34 +186,64 @@ async function fetchDiscord() {
   return results;
 }
 
-// ── Roblox fetch ──────────────────────────────────────────────────
+// ── Roblox fetch (multi-proxy com fallback e timeout) ─────────────
 async function fetchRoblox() {
   const ids = ROBLOX_GAMES.map(g => g.universeId).join(',');
-  try {
-    const url = `https://games.roblox.com/v1/games?universeIds=${ids}`;
-    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-    const res = await fetch(proxy);
-    const json = await res.json();
-    const data = JSON.parse(json.contents);
+  const robloxUrl = `https://games.roblox.com/v1/games?universeIds=${ids}`;
 
-    robloxData = ROBLOX_GAMES.map(g => {
-      const match = data.data.find(d => String(d.id) === g.universeId);
-      return {
-        label:   g.label,
-        visits:  match?.visits  ?? 0,
-        playing: match?.playing ?? 0,
-      };
-    });
-  } catch {
-    robloxData = ROBLOX_GAMES.map(g => ({ label: g.label, visits: 0, playing: 0 }));
+  const proxies = [
+    () => fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(robloxUrl)}`)
+            .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+            .then(j => JSON.parse(j.contents)),
+    () => fetch(`https://corsproxy.io/?${encodeURIComponent(robloxUrl)}`)
+            .then(r => { if (!r.ok) throw new Error(); return r.json(); }),
+    () => fetch(`https://api.codetabs.com/v1/proxy?quest=${robloxUrl}`)
+            .then(r => { if (!r.ok) throw new Error(); return r.json(); }),
+  ];
+
+  let data = null;
+
+  for (const attempt of proxies) {
+    try {
+      const result = await Promise.race([
+        attempt(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 4000)),
+      ]);
+      if (result?.data?.length) {
+        data = result;
+        break;
+      }
+    } catch (_) {
+      // tenta o próximo proxy
+    }
   }
+
+  // Todos os proxies falharam — mantém cache anterior em vez de mostrar "—"
+  if (!data) {
+    const cached = loadCache(CACHE_KEY_ROBLOX, Infinity);
+    if (cached) {
+      robloxData = cached;
+      return cached;
+    }
+    robloxData = ROBLOX_GAMES.map(g => ({ label: g.label, visits: 0, playing: 0 }));
+    return robloxData;
+  }
+
+  robloxData = ROBLOX_GAMES.map(g => {
+    const match = data.data.find(d => String(d.id) === g.universeId);
+    return {
+      label:   g.label,
+      visits:  match?.visits  ?? 0,
+      playing: match?.playing ?? 0,
+    };
+  });
+
   saveCache(CACHE_KEY_ROBLOX, robloxData);
   return robloxData;
 }
 
 // ── Inicializa stats com cache e depois puxa API ──────────────────
 async function loadStats() {
-  // 1. Carrega cache imediatamente — sem "—"
   const cachedDiscord = loadCache(CACHE_KEY_DISCORD);
   const cachedRoblox  = loadCache(CACHE_KEY_ROBLOX);
 
@@ -226,7 +259,6 @@ async function loadStats() {
     updatePopovers();
   }
 
-  // Se não havia cache, mostra placeholder amigável em vez de "—"
   if (!cachedDiscord) {
     const elMembers = document.getElementById('stat-members');
     const elServers = document.getElementById('stat-servers');
@@ -235,17 +267,14 @@ async function loadStats() {
     applyStats(2_500_000, STAT_INVITES.length);
   }
 
-  // 2. Puxa dados frescos da API em paralelo
   const [discord, roblox] = await Promise.all([fetchDiscord(), fetchRoblox()]);
 
   const totalMembers = discord.reduce((a, b) => a + b.members, 0);
   const totalServers = STAT_INVITES.length;
 
-  // Atualiza todos os pontos de exibição com dados reais
   applyStats(totalMembers, totalServers);
   updatePopovers();
 
-  // Dispara animação de contagem nos stat cards (seção Impact)
   observeStats(totalMembers, totalServers);
 }
 
@@ -351,6 +380,96 @@ popoverStyles.textContent = `
     background: #22c55e;
     animation: pulseBadge 2s ease infinite;
   }
+
+  /* ── Card member badge ─────────────────────────────────── */
+  .card-member-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 5px 12px 5px 8px;
+    border-radius: 100px;
+    background: rgba(195, 20, 91, 0.08);
+    border: 1px solid rgba(195, 20, 91, 0.18);
+    width: fit-content;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .project-card:hover .card-member-badge {
+    background: rgba(195, 20, 91, 0.13);
+    border-color: rgba(195, 20, 91, 0.3);
+  }
+  .card-member-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #c3145b;
+    flex-shrink: 0;
+    animation: pulseBadge 2s ease infinite;
+  }
+  .card-member-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: #c3145b;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .card-member-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(195, 20, 91, 0.7);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* skeleton shimmer enquanto carrega */
+  .card-member-badge.loading .card-member-count {
+    display: inline-block;
+    width: 40px;
+    height: 12px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgba(195,20,91,0.1) 25%, rgba(195,20,91,0.2) 50%, rgba(195,20,91,0.1) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    vertical-align: middle;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* badge de visits para Roblox */
+  .card-roblox-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 5px 12px 5px 8px;
+    border-radius: 100px;
+    background: rgba(10, 10, 10, 0.05);
+    border: 1px solid rgba(10, 10, 10, 0.1);
+    width: fit-content;
+    transition: background 0.2s;
+  }
+  .project-card:hover .card-roblox-badge {
+    background: rgba(10, 10, 10, 0.08);
+  }
+  .card-roblox-badge svg {
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+  .card-roblox-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink2);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .card-roblox-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
 `;
 document.head.appendChild(popoverStyles);
 
@@ -394,10 +513,44 @@ function updatePopovers() {
   }
 }
 
+// ── Atualiza badges de membros nos project cards ──────────────────
+function updateCardBadges() {
+  // Discord badges (staff + translator que têm discordInvite)
+  document.querySelectorAll('[data-discord-invite]').forEach(badge => {
+    const invite = badge.dataset.discordInvite;
+    const entry  = discordData.find(d => {
+      // mapeia o invite para o label correspondente em STAT_INVITES
+      const match = STAT_INVITES.find(s => s.invite === invite);
+      return match && d.label === match.label;
+    });
+    const count = entry?.members ?? 0;
+    const countEl = badge.querySelector('.card-member-count');
+    if (!countEl) return;
+    badge.classList.remove('loading');
+    if (count > 0) {
+      countEl.textContent = fmtBig(count) + '+';
+    } else {
+      countEl.textContent = '—';
+    }
+  });
+
+  // Roblox badges
+  document.querySelectorAll('[data-roblox-id]').forEach(badge => {
+    const universeId = badge.dataset.robloxId;
+    const entry = robloxData.find(g => g.universeId === universeId || ROBLOX_GAMES.find(r => r.universeId === universeId && r.label === g.label));
+    const visits = entry?.visits ?? 0;
+    const countEl = badge.querySelector('.card-roblox-count');
+    if (!countEl) return;
+    if (visits > 0) {
+      countEl.textContent = fmtBig(visits) + '+';
+    }
+  });
+}
+
 // ── Projects ──────────────────────────────────────────────────────
 const projects = [
   {
-    title: "Volleyball Legends (1.90M+ Members)",
+    title: "Volleyball Legends",
     description_card: "🔨 Largest Volleyball Community server on all of Discord.",
     description: `
       <p>Volleyball Legends is one of the largest gaming communities on Discord, with over 2.0 million members, fully dedicated to the game Volleyball Legends.</p>
@@ -408,10 +561,11 @@ const projects = [
     `,
     image: "https://tr.rbxcdn.com/180DAY-a1260693b7f075c5e8482b83e0531ad7/512/512/Image/Png/noFilter.png",
     link: "https://discord.gg/volleyballlegends",
-    category: "staff"
+    category: "staff",
+    discordInvite: "volleyballlegends",
   },
   {
-    title: "IT'S A TRAP (350.0K+ Members)",
+    title: "IT'S A TRAP",
     description_card: "🔨 One of the largest Brazilian YouTuber communities on Discord.",
     description: `
       <p>ITS A TRAP is a Discord community created around a well-known YouTuber, with over 350,000 members. The server is focused on geek culture, entertainment, and active community discussions.</p>
@@ -422,10 +576,11 @@ const projects = [
     `,
     image: "https://www.spicybaboon.com.au/cdn/shop/products/it-s-a-trap-sticker-39922710413597.png?v=1669616751",
     link: "https://discord.gg/itsatrap",
-    category: "staff"
+    category: "staff",
+    discordInvite: "itsatrap",
   },
   {
-    title: "Mush (190.0K+ Members)",
+    title: "Mush",
     description_card: "🔨 The largest Minecraft server in Brazil.",
     description: `
       <p>Mush is a Brazilian Minecraft server, with over 5000 members usually, that offers multiple game modes such as PvP, minigames, and competitive events, bringing together a large and active player base.</p>
@@ -436,10 +591,11 @@ const projects = [
     `,
     image: "https://static.wikia.nocookie.net/famosos/images/a/ad/MushMC_logo_500x.png/revision/latest?cb=20230201012535&path-prefix=pt-br",
     link: "https://discord.gg/mush",
-    category: "staff"
+    category: "staff",
+    discordInvite: "mush",
   },
   {
-    title: "Decorations for Server (150.0K+ Members)",
+    title: "Decorations for Server",
     description_card: "🔨 The largest artistic community server on Discord.",
     description: `
       <p>Decorations for Server is one of the largest decoration-focused communities on Discord, with over 100,000 members dedicated to server aesthetics, resources, and customization.</p>
@@ -450,10 +606,11 @@ const projects = [
     `,
     image: "https://cdn.discordapp.com/icons/1472578867246923913/4d3359d367027f046bfc638d325da93c.png?size=2048",
     link: "https://discord.gg/UKPg88Weeh",
-    category: "staff"
+    category: "staff",
+    discordInvite: "UKPg88Weeh",
   },
   {
-    title: "Hylex (70.0K+ Members)",
+    title: "Hylex",
     description_card: "🔨 The second largest Minecraft server in Brazil.",
     description: `
       <p>Hylex is a Brazilian Minecraft server that offers a variety of game modes, focusing on competitive gameplay and an active player base, with over 2500 members usually.</p>
@@ -464,10 +621,11 @@ const projects = [
     `,
     image: "https://yt3.googleusercontent.com/-s7qozr0Z0ltbuXgfnhHdiVH9ezW4J7OAu46tgagMJxqJ2AJarftCF_x8axYLMlZemElEdXJKa4=s900-c-k-c0x00ffffff-no-rj",
     link: "https://discord.gg/hylex",
-    category: "staff"
+    category: "staff",
+    discordInvite: "hylex",
   },
   {
-    title: "Minecraft (4.00M+ Members)",
+    title: "Minecraft",
     description_card: "🌐 The best-selling sandbox game of all time.",
     description: `
       <p>Minecraft is a sandbox game that allows players to explore, build, and survive in a procedurally generated world made of blocks.</p>
@@ -478,10 +636,12 @@ const projects = [
     `,
     image: "https://i.redd.it/remake-minecraft-logo-v0-avjal33hpqo61.png?width=512&format=png&auto=webp&s=f633ef8225260cd0a7c835892bb9af40bfe990a0",
     link: "https://discord.gg/minecraft",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "4M",
   },
   {
-    title: "Lunar Client (3.2M+ Members)",
+    title: "Lunar Client",
     description_card: "🌐 The leading client designed specifically for Minecraft.",
     description: `
       <p>Lunar Client is a modded client for Minecraft that improves performance, adds built-in mods, and provides competitive features for a smoother gameplay experience.</p>
@@ -492,10 +652,12 @@ const projects = [
     `,
     image: "https://avatars.githubusercontent.com/u/57332930?s=280&v=4",
     link: "https://discord.gg/lunarclient",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "3.2M",
   },
   {
-    title: "Badlion Client (2.6M+ Members)",
+    title: "Badlion Client",
     description_card: "🌐 The second leading client designed specifically for Minecraft.",
     description: `
       <p>Badlion Client is a modded client for Minecraft that offers performance improvements, built-in mods, and an integrated anti-cheat system.</p>
@@ -506,10 +668,12 @@ const projects = [
     `,
     image: "https://avatars.githubusercontent.com/u/11240281?s=280&v=4",
     link: "https://discord.gg/badlion",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "2.6M",
   },
   {
-    title: "Garry's Mod (500.0K+ Members)",
+    title: "Garry's Mod",
     description_card: "🌐 One of the most influential sandbox games, widely recognized.",
     description: `
       <p>Garry's Mod is a physics-based sandbox game that allows players to manipulate objects, create custom game modes, and experiment freely using tools and community-made content.</p>
@@ -520,10 +684,12 @@ const projects = [
     `,
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Garry%27s_Mod_logo.svg/960px-Garry%27s_Mod_logo.svg.png",
     link: "https://discord.gg/gmod",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "500K",
   },
   {
-    title: "Hypixel (480.0K+ Members)",
+    title: "Hypixel",
     description_card: "🌐 The Minecraft server with the highest player count currently.",
     description: `
       <p>Hypixel is one of the largest and most popular servers for Minecraft, known for its wide variety of custom mini-games such as Bed Wars and SkyBlock.</p>
@@ -534,10 +700,12 @@ const projects = [
     `,
     image: "https://hypixel.net/styles/hypixel-v2/images/hypixel-512px.png",
     link: "https://discord.gg/hypixel",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "480K",
   },
   {
-    title: "Sodium (100.0K+ Members)",
+    title: "Sodium",
     description_card: "🌐 One of the most widely used performance optimization mods for Minecraft.",
     description: `
       <p>Sodium is a performance optimization mod for Minecraft, designed to significantly improve frame rates and reduce lag.</p>
@@ -548,10 +716,12 @@ const projects = [
     `,
     image: "https://pt.minecraft.wiki/images/Sodium_logo.png?23291",
     link: "https://modrinth.com/mod/sodium/versions",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "100K",
   },
   {
-    title: "OSU! Web (100.0K+ Members)",
+    title: "OSU! Web",
     description_card: "🌐 One of the most widely played rhythm games of all times.",
     description: `
       <p>osu! is a free-to-play rhythm game developed for PC. It focuses on clicking circles, sliding, and spinning on screen in time with music.</p>
@@ -562,7 +732,9 @@ const projects = [
     `,
     image: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Osulogo.png",
     link: "https://discord.gg/osu",
-    category: "translator"
+    category: "translator",
+    discordInvite: null,
+    staticMembers: "100K",
   },
   {
     title: "In progress...",
@@ -570,7 +742,8 @@ const projects = [
     description: `<p>In progress...</p>`,
     image: "https://images.vexels.com/media/users/3/152864/isolated/preview/2e095de08301a57890aad6898ad8ba4c-icone-de-ponto-de-interrogacao-do-circulo-amarelo.png",
     link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    category: "programs"
+    category: "programs",
+    discordInvite: null,
   },
 ];
 
@@ -581,6 +754,31 @@ const modalTitle = document.getElementById('modal-title');
 const modalDesc  = document.getElementById('modal-description');
 const modalLink  = document.getElementById('modal-link');
 const modalTag   = document.getElementById('modal-tag');
+
+// ── Gera o HTML da badge de membros ──────────────────────────────
+function buildMemberBadge(p) {
+  // Projetos com invite do Discord trackado em tempo real
+  if (p.discordInvite) {
+    return `
+      <div class="card-member-badge loading" data-discord-invite="${p.discordInvite}">
+        <span class="card-member-dot"></span>
+        <span class="card-member-count"></span>
+        <span class="card-member-label">members</span>
+      </div>`;
+  }
+
+  // Projetos translator com valor estático mas visual igual
+  if (p.staticMembers) {
+    return `
+      <div class="card-member-badge">
+        <span class="card-member-dot" style="animation:none;background:#c3145b;opacity:0.5;"></span>
+        <span class="card-member-count">${p.staticMembers}+</span>
+        <span class="card-member-label">members</span>
+      </div>`;
+  }
+
+  return '';
+}
 
 function renderProjects(filter) {
   container.innerHTML = '';
@@ -602,18 +800,23 @@ function renderProjects(filter) {
     const tagMap = { staff: 'Staff', translator: 'Translator', programs: 'Programs' };
     const tag = tagMap[p.category] || p.category;
 
+    const memberBadge = buildMemberBadge(p);
+
     card.innerHTML = `
       <div class="card-img-wrap">
-        <img src="${p.image}" alt="${p.title}" loading="lazy" />
-        <div class="card-img-overlay"></div>
+      <img src="${p.image}" alt="${p.title}" loading="lazy" />
+      <div class="card-img-overlay"></div>
       </div>
       <div class="project-info">
-        <div>
-          <div class="project-tag-pill">${tag}</div>
-          <h3>${p.title}</h3>
-          <p>${p.description_card}</p>
-        </div>
-        <button class="btn-project">View Details</button>
+      <div>
+      <div class="project-tag-pill">${tag}</div>
+      <h3>${p.title}</h3>
+      <p>${p.description_card}</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+      ${memberBadge}
+      <button class="btn-project">View Details</button>
+      </div>
       </div>
     `;
 
@@ -621,6 +824,8 @@ function renderProjects(filter) {
     container.appendChild(card);
   });
 
+  // Aplica dados já disponíveis nas badges recém-renderizadas
+  updateCardBadges();
   attachCursorHover();
 }
 
@@ -773,7 +978,6 @@ splashBtn.addEventListener('click', () => {
 ═══════════════════════════════════════════════════════════════════ */
 
 // ── 1. CHAR STAGGER no título hero ────────────────────────────────
-// Quebra "Xeva" letra por letra com delay individual
 (function splitHeroTitle() {
   const nameBig = document.querySelector('.name-big');
   if (!nameBig) return;
@@ -809,7 +1013,6 @@ document.addEventListener('click', e => {
 }, { passive: true });
 
 // ── 3. STAGGER nos filhos de seções ───────────────────────────────
-// Adiciona a classe stagger-children nos grupos de cards/pills
 (function setupStagger() {
   const targets = [
     '.stats-cards',
@@ -826,7 +1029,6 @@ document.addEventListener('click', e => {
     });
   });
 
-  // Observer para ativar quando entrar na viewport
   const staggerObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -842,7 +1044,6 @@ document.addEventListener('click', e => {
 })();
 
 // ── 4. SCROLL REVEAL com direções alternadas ──────────────────────
-// About: esquerda entra da esquerda, direita entra da direita
 (function setupDirectionalReveals() {
   const leftSide  = document.querySelector('.about-left');
   const rightSide = document.querySelector('.about-right');
@@ -851,7 +1052,6 @@ document.addEventListener('click', e => {
 })();
 
 // ── 5. PARALLAX leve nas orbs do hero ─────────────────────────────
-// (já existe no script original via mousemove — apenas suaviza)
 (function smoothOrbs() {
   let orbTargetX = 0, orbTargetY = 0;
   let orbCurrentX = 0, orbCurrentY = 0;
@@ -887,7 +1087,7 @@ document.addEventListener('click', e => {
       const cy     = rect.top  + rect.height / 2;
       const dx     = (e.clientX - cx) / (rect.width  / 2);
       const dy     = (e.clientY - cy) / (rect.height / 2);
-      const rotateX = dy * -4;   // máx 4° — sutil
+      const rotateX = dy * -4;
       const rotateY = dx *  4;
 
       card.style.transform = `translateY(-10px) scale(1.012) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -900,7 +1100,6 @@ document.addEventListener('click', e => {
     });
   }
 
-  // Aplica nos cards já renderizados e nos futuros (re-render do filtro)
   function attachTiltToCards() {
     document.querySelectorAll('.project-card').forEach(card => {
       if (card.dataset.tilt) return;
@@ -912,7 +1111,6 @@ document.addEventListener('click', e => {
 
   attachTiltToCards();
 
-  // Re-aplica após filtro mudar (MutationObserver no container)
   const projectsContainer = document.getElementById('projects-container');
   if (projectsContainer) {
     new MutationObserver(attachTiltToCards).observe(projectsContainer, { childList: true });
@@ -925,16 +1123,9 @@ document.addEventListener('click', e => {
   const ring = document.querySelector('.cursor-ring');
   if (!dot || !ring) return;
 
-  // Quando hover em elementos interativos, cursor "gruda" levemente no centro
   document.addEventListener('mouseover', e => {
     const target = e.target.closest('a, button, .project-card, .contact-card, .stat-card, .tag, .sg-pills span');
     if (!target) return;
-
-    const rect = target.getBoundingClientRect();
-    const cx = rect.left + rect.width  / 2;
-    const cy = rect.top  + rect.height / 2;
-
-    // Leve atração magnética — move o ring em direção ao centro do elemento
     ring.style.transition = 'left 0.3s cubic-bezier(0.34,1.56,0.64,1), top 0.3s cubic-bezier(0.34,1.56,0.64,1), width 0.25s, height 0.25s, border-color 0.25s';
   });
 
@@ -946,16 +1137,13 @@ document.addEventListener('click', e => {
 })();
 
 // ── 8. NÚMERO contador no hero stat de membros ────────────────────
-// Anima quando o hero carrega, não só na seção Impact
 (function heroStatCount() {
   const heroMembersEl = document.querySelector('.hero-stat-members');
   if (!heroMembersEl) return;
 
-  // Aguarda 0.9s (após stagger dos stats) e anima
   setTimeout(() => {
-    // Pega o valor atual (pode ser do cache já aplicado)
     const raw = heroMembersEl.textContent.replace(/[^0-9.MKB]/g, '');
-    let target = 2_500_000; // fallback
+    let target = 2_500_000;
 
     if (raw.includes('M')) target = parseFloat(raw) * 1_000_000;
     else if (raw.includes('K')) target = parseFloat(raw) * 1_000;
