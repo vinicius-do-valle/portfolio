@@ -1,14 +1,469 @@
-<!--
-====================================================
-OBFUSCATED PROJECT
-© Vinicius Valle Rodrigues. All Rights Reserved.
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Xeeeva — Sites profissionais que vendem. Design, código e entrega rápida." />
+  <title>Xeeeva — Sites que vendem</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
 
-This project contains proprietary and obfuscated code.
-Unauthorized copying, modification, distribution,
-reverse engineering, decompilation, or disclosure
-of any part of this project is strictly prohibited.
-====================================================
--->
+  <!-- CURSOR -->
+  <div class="c-dot"  id="cDot"></div>
+  <div class="c-ring" id="cRing"></div>
 
+  <!-- ══════════════════════════════════
+       NAV
+  ══════════════════════════════════ -->
+  <nav id="site-nav">
+    <a href="#" class="nav-logo">Xeeeva<span></span></a>
+    <div class="nav-links">
+      <a href="#services">Serviços</a>
+      <a href="#why">Diferenciais</a>
+      <a href="#process">Processo</a>
+      <a href="#cta" class="btn-nav">Solicitar orçamento →</a>
+    </div>
+  </nav>
 
-<script>document.write(decodeURIComponent(escape(atob("PCFET0NUWVBFIGh0bWw+Cgo8aHRtbCBsYW5nPSJwdC1iciI+CjxoZWFkPgo8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KPHRpdGxlPlhldmEg4oCUIERldmVsb3BlciAmIENyZWF0b3I8L3RpdGxlPgo8bGluayByZWw9InByZWNvbm5lY3QiIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20iPgo8bGluayByZWw9InByZWNvbm5lY3QiIGhyZWY9Imh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20iIGNyb3Nzb3JpZ2luPgo8bGluayBocmVmPSJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PVBvcHBpbnM6aXRhbCx3Z2h0QDAsMjAwOzAsMzAwOzAsNDAwOzAsNTAwOzAsNjAwOzAsNzAwOzAsODAwOzAsOTAwOzEsMzAwOzEsODAwJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJjc3Mvc3R5bGUuY3NzIj4KPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJjc3MvYW5pbWF0aW9ucy5jc3MiPgo8L2hlYWQ+Cgo8Ym9keT4KICA8ZGl2IGlkPSJzcGxhc2gtc2NyZWVuIj4KICAgIDxkaXYgY2xhc3M9InNwbGFzaC1jb250ZW50Ij4KICAgICAgPGRpdiBjbGFzcz0ic3BsYXNoLWxvZ28iPlg8c3Bhbj4uPC9zcGFuPjwvZGl2PgogICAgICA8cCBjbGFzcz0ic3BsYXNoLXN1YiI+RGV2ZWxvcGVyICYgQ3JlYXRvcjwvcD4KICAgICAgPGJ1dHRvbiBpZD0ic3BsYXNoLWJ0biI+CiAgICAgICAgPHNwYW4+RW50ZXIgUG9ydGZvbGlvPC9zcGFuPgogICAgICAgIDxzdmcgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiPgogICAgICAgICAgPHBhdGggZD0iTTMgOGgxME05IDRsNCA0LTQgNCIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICAgICAgICA8L3N2Zz4KICAgICAgPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KCiAgPGF1ZGlvIGlkPSJiZy1tdXNpYyIgbG9vcD4KICAgIDxzb3VyY2Ugc3JjPSIuL2Nzcy9hdWRpby9tdXNpY2EubXAzIiB0eXBlPSJhdWRpby9tcGVnIj4KICA8L2F1ZGlvPgoKICA8ZGl2IGNsYXNzPSJjdXJzb3ItZG90Ij48L2Rpdj4KICA8ZGl2IGNsYXNzPSJjdXJzb3ItcmluZyI+PC9kaXY+CgogIDxoZWFkZXIgaWQ9InNpdGUtaGVhZGVyIj4KICAgIDxkaXYgY2xhc3M9Im5hdi1pbm5lciI+CiAgICAgIDxhIGhyZWY9IiNpbmljaW8iIGNsYXNzPSJuYXYtbG9nbyI+WDxzcGFuPi48L3NwYW4+PC9hPgogICAgICA8bmF2PgogICAgICAgIDxhIGhyZWY9IiNpbmljaW8iIGNsYXNzPSJuYXYtbGluayI+SG9tZTwvYT4KICAgICAgICA8YSBocmVmPSIjc29icmUiIGNsYXNzPSJuYXYtbGluayI+QWJvdXQ8L2E+CiAgICAgICAgPGEgaHJlZj0iI3Byb2pldG9zIiBjbGFzcz0ibmF2LWxpbmsiPlByb2plY3RzPC9hPgogICAgICAgIDxhIGhyZWY9IiNoaXJlIiBjbGFzcz0ibmF2LWxpbmsiPkhpcmUgTWU8L2E+CiAgICAgIDwvbmF2PgogICAgICA8ZGl2IGNsYXNzPSJuYXYtY3RhIj4KICAgICAgICA8YSBocmVmPSIjaGlyZSIgY2xhc3M9ImJ0bi1uYXYiPkxldCdzIFRhbGsg4oaSPC9hPgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvaGVhZGVyPgoKICA8c2VjdGlvbiBpZD0iaW5pY2lvIiBjbGFzcz0iaGVybyI+CiAgICA8ZGl2IGNsYXNzPSJvcmIgb3JiLTEiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0ib3JiIG9yYi0yIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9Im9yYiBvcmItMyI+PC9kaXY+CgogICAgPGRpdiBjbGFzcz0iaGVyby1jb250ZW50Ij4KICAgICAgPGRpdiBjbGFzcz0iaGVyby1sZWZ0Ij4KICAgICAgICA8ZGl2IGNsYXNzPSJoZXJvLWJhZGdlIHJldmVhbCI+CiAgICAgICAgICA8c3BhbiBjbGFzcz0iYmFkZ2UtcHVsc2UiPjwvc3Bhbj4KICAgICAgICAgIEF2YWlsYWJsZSBmb3Igd29yawogICAgICAgIDwvZGl2PgoKICAgICAgICA8aDEgY2xhc3M9Imhlcm8tdGl0bGUgcmV2ZWFsLXVwIj4KICAgICAgICAgIDxzcGFuIGNsYXNzPSJsaW5lLXdyYXAiPjxzcGFuIGNsYXNzPSJsaW5lIj5IZWxsbywgSSdtPC9zcGFuPjwvc3Bhbj4KICAgICAgICAgIDxzcGFuIGNsYXNzPSJsaW5lLXdyYXAgbmFtZS13cmFwIj48c3BhbiBjbGFzcz0ibGluZSBuYW1lLWJpZyI+WGV2YTwvc3Bhbj48c3BhbiBjbGFzcz0id2F2ZS1lbW9qaSI+PC9zcGFuPjwvc3Bhbj4KICAgICAgICA8L2gxPgoKICAgICAgICA8cCBjbGFzcz0iaGVyby1zdWIgcmV2ZWFsLXVwIGRlbGF5LTEiPkRldmVsb3BlciwgVHJhbnNsYXRvciAmIENvbW11bml0eSBNYW5hZ2VyIHdpdGggb3ZlciA8c3Ryb25nPjYgeWVhcnM8L3N0cm9uZz4gb2YgZXhwZXJpZW5jZSBidWlsZGluZyBjb21tdW5pdGllcyBhbmQgc2hpcHBpbmcgbWVhbmluZ2Z1bCBwcm9qZWN0cy48L3A+CgogICAgICAgIDxkaXYgY2xhc3M9Imhlcm8tYWN0aW9ucyByZXZlYWwtdXAgZGVsYXktMiI+CiAgICAgICAgICA8YSBocmVmPSIjcHJvamV0b3MiIGNsYXNzPSJidG4tcHJpbWFyeSI+CiAgICAgICAgICAgIDxzcGFuPlNlZSBQcm9qZWN0czwvc3Bhbj4KICAgICAgICAgICAgPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTMgOGgxME05IDRsNCA0LTQgNCIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4KICAgICAgICAgIDwvYT4KICAgICAgICAgIDxhIGhyZWY9IiNoaXJlIiBjbGFzcz0iYnRuLWdob3N0Ij5HZXQgaW4gVG91Y2g8L2E+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxkaXYgY2xhc3M9Imhlcm8tc3RhdHMgcmV2ZWFsLXVwIGRlbGF5LTMiPgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdCI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXQtdmFsIj42PGVtPiArPC9lbT48L2Rpdj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC1rZXkiPlllYXJzIGV4cC48L2Rpdj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC1zZXAiPjwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdCI+CiAgICAgICAgICAgIAogICAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LXZhbCBoZXJvLXN0YXQtbWVtYmVycyI+Mi41TTxlbT4gKzwvZW0+PC9kaXY+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXQta2V5Ij5Db21tdW5pdHkgbWVtYmVyczwvZGl2PgogICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LXNlcCI+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC12YWwiPjc8ZW0+ICs8L2VtPjwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LWtleSI+TGFuZ3VhZ2VzPC9kaXY+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgICAgPC9kaXY+CgogICAgICA8ZGl2IGNsYXNzPSJoZXJvLXJpZ2h0IHJldmVhbC1zY2FsZSI+CiAgICAgICAgPGRpdiBjbGFzcz0iYXZhdGFyLWZyYW1lIj4KICAgICAgICAgIDxkaXYgY2xhc3M9ImF2YXRhci1iZy1yaW5nIHJpbmctMSI+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJhdmF0YXItYmctcmluZyByaW5nLTIiPjwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0iYXZhdGFyLWJnLXJpbmcgcmluZy0zIj48L2Rpdj4KICAgICAgICAgIDxpbWcgY2xhc3M9ImF2YXRhci1pbWciIHNyYz0iaHR0cHM6Ly9pLnBpbmltZy5jb20vMTIwMHgvZjcvNzYvNGMvZjc3NjRjM2JiYjE2MWQyYTA3MGVhOWQzYjRmMjUxN2QuanBnIiBhbHQ9IlhldmEiIC8+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJhdmF0YXItYmFkZ2UtZmxvYXQiPgogICAgICAgICAgICA8c3BhbiBjbGFzcz0iZG90LWxpdmUiPjwvc3Bhbj4gT3BlbiB0byB3b3JrCiAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0ic2tpbGwtZmxvYXQgc2tpbGwtZmxvYXQtMSI+SmF2YVNjcmlwdDwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InNraWxsLWZsb2F0IHNraWxsLWZsb2F0LTIiPlB5dGhvbjwvZGl2PgogICAgICAgIAogICAgICAgIDxkaXYgY2xhc3M9InNraWxsLWZsb2F0IHNraWxsLWZsb2F0LTMiPjIuNU0rIE1lbWJlcnM8L2Rpdj4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KCiAgICA8ZGl2IGNsYXNzPSJzY3JvbGwtaGludCI+CiAgICAgIDxkaXYgY2xhc3M9InNjcm9sbC1saW5lIj48L2Rpdj4KICAgICAgPHNwYW4+c2Nyb2xsPC9zcGFuPgogICAgPC9kaXY+CiAgPC9zZWN0aW9uPgoKICA8ZGl2IGNsYXNzPSJtYXJxdWVlLXN0cmlwIj4KICAgIDxkaXYgY2xhc3M9Im1hcnF1ZWUtdHJhY2siPgogICAgICA8c3Bhbj5KYXZhU2NyaXB0PC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPlB5dGhvbjwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5KYXZhPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkMgLyBDKysgLyBDIzwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5MdWE8L3NwYW4+PHNwYW4gY2xhc3M9ImRvdC1zZXAiPuKcpjwvc3Bhbj4KICAgICAgPHNwYW4+VHlwZVNjcmlwdDwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5IVE1MICYgQ1NTPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPlBIUDwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5UcmFuc2xhdGlvbjwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5Db21tdW5pdHkgTWdtdDwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5Kb3VybmFsaXNtPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkphdmFTY3JpcHQ8L3NwYW4+PHNwYW4gY2xhc3M9ImRvdC1zZXAiPuKcpjwvc3Bhbj4KICAgICAgPHNwYW4+UHl0aG9uPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkphdmE8L3NwYW4+PHNwYW4gY2xhc3M9ImRvdC1zZXAiPuKcpjwvc3Bhbj4KICAgICAgPHNwYW4+QyAvIEMrKyAvIEMjPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkx1YTwvc3Bhbj48c3BhbiBjbGFzcz0iZG90LXNlcCI+4pymPC9zcGFuPgogICAgICA8c3Bhbj5UeXBlU2NyaXB0PC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkhUTUwgJiBDU1M8L3NwYW4+PHNwYW4gY2xhc3M9ImRvdC1zZXAiPuKcpjwvc3Bhbj4KICAgICAgPHNwYW4+UEhQPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPlRyYW5zbGF0aW9uPC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkNvbW11bml0eSBNZ210PC9zcGFuPjxzcGFuIGNsYXNzPSJkb3Qtc2VwIj7inKY8L3NwYW4+CiAgICAgIDxzcGFuPkpvdXJuYWxpc208L3NwYW4+PHNwYW4gY2xhc3M9ImRvdC1zZXAiPuKcpjwvc3Bhbj4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8c2VjdGlvbiBpZD0ic29icmUiIGNsYXNzPSJhYm91dCI+CiAgICA8ZGl2IGNsYXNzPSJhYm91dC1ncmlkIj4KICAgICAgPGRpdiBjbGFzcz0iYWJvdXQtbGVmdCI+CiAgICAgICAgPGRpdiBjbGFzcz0ic2VjdGlvbi1leWVicm93IHNjcm9sbC1yZXZlYWwiPkFib3V0IG1lPC9kaXY+CiAgICAgICAgPGgyIGNsYXNzPSJzZWN0aW9uLXRpdGxlIHNjcm9sbC1yZXZlYWwiPk1vcmUgdGhhbiBqdXN0PGJyPjxlbT5hIGRldmVsb3BlcjwvZW0+PC9oMj4KICAgICAgICA8cCBjbGFzcz0iYWJvdXQtYm9keSBzY3JvbGwtcmV2ZWFsIj5IZXkgdGhlcmUhIEknbSBYZWVldmEuIEknbSBhIHRyYW5zbGF0b3IsIHByb2dyYW1tZXIsIGpvdXJuYWxpc3QsIGRldmVsb3BlciwgYW5kIG11Y2ggbW9yZS4gVGhpcyBwb3J0Zm9saW8gZ2l2ZXMgYSBnbGltcHNlIGludG8gbXkgd29yaywgc2tpbGxzLCBhbmQgZXhwZXJpZW5jZSBhY3Jvc3MgdGVjaG5vbG9neSwgY29tbXVuaXR5IG1hbmFnZW1lbnQsIGFuZCBjb250ZW50IGNyZWF0aW9uLjwvcD4KCiAgICAgICAgPGRpdiBjbGFzcz0iYWJvdXQtdGFncyBzY3JvbGwtcmV2ZWFsIj4KICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0YWciPkJ1aWxkZXI8L3NwYW4+CiAgICAgICAgICA8c3BhbiBjbGFzcz0idGFnIj5UcmFuc2xhdG9yPC9zcGFuPgogICAgICAgICAgPHNwYW4gY2xhc3M9InRhZyI+Sm91cm5hbGlzdDwvc3Bhbj4KICAgICAgICAgIDxzcGFuIGNsYXNzPSJ0YWciPkNvbW11bml0eSBMZWFkPC9zcGFuPgogICAgICAgIDwvZGl2PgogICAgICA8L2Rpdj4KCiAgICAgIDxkaXYgY2xhc3M9ImFib3V0LXJpZ2h0Ij4KICAgICAgICA8ZGl2IGNsYXNzPSJza2lsbHMtY2FyZCBzY3JvbGwtcmV2ZWFsIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InNraWxscy1jYXJkLWhlYWRlciI+CiAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJza2lsbHMtbGFiZWwiPlNraWxscyAmIEV4cGVydGlzZTwvc3Bhbj4KICAgICAgICAgICAgPHNwYW4gY2xhc3M9InNraWxscy1jb3VudCI+MTEgdGVjaG5vbG9naWVzPC9zcGFuPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJza2lsbC1ncm91cCI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InNnLXRpdGxlIj5Qcm9ncmFtbWluZyBMYW5ndWFnZXM8L2Rpdj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ic2ctcGlsbHMiPgogICAgICAgICAgICAgIDxzcGFuPkphdmFTY3JpcHQ8L3NwYW4+PHNwYW4+SmF2YTwvc3Bhbj48c3Bhbj5QeXRob248L3NwYW4+PHNwYW4+Qzwvc3Bhbj48c3Bhbj5DIzwvc3Bhbj48c3Bhbj5DKys8L3NwYW4+PHNwYW4+THVhPC9zcGFuPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0ic2tpbGwtZ3JvdXAiPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJzZy10aXRsZSI+V2ViIERldmVsb3BtZW50PC9kaXY+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InNnLXBpbGxzIj4KICAgICAgICAgICAgICA8c3Bhbj5IVE1MPC9zcGFuPjxzcGFuPkNTUzwvc3Bhbj48c3Bhbj5UeXBlU2NyaXB0PC9zcGFuPjxzcGFuPlBIUDwvc3Bhbj4KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InNraWxsLWdyb3VwIj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0ic2ctdGl0bGUiPkNvbW11bml0eSBNYW5hZ2VtZW50PC9kaXY+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InNnLXBpbGxzIGxhcmdlIj4KICAgICAgICAgICAgICAKICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0ic2tpbGwtZGlzY29yZC1waWxsIj5EaXNjb3JkIOKAlCAyLjVNKyBNZW1iZXJzPC9zcGFuPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0ic2tpbGwtZ3JvdXAiPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJzZy10aXRsZSI+T3RoZXIgU2tpbGxzPC9kaXY+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InNnLXBpbGxzIj4KICAgICAgICAgICAgICA8c3Bhbj5UcmFuc2xhdGlvbjwvc3Bhbj48c3Bhbj5Qcm9qZWN0IERldjwvc3Bhbj48c3Bhbj5Kb3VybmFsaXNtPC9zcGFuPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvc2VjdGlvbj4KCiAgPHNlY3Rpb24gaWQ9InN0YXRzIiBjbGFzcz0ic3RhdHMtc2VjdGlvbiI+CiAgICA8ZGl2IGNsYXNzPSJzdGF0cy1pbm5lciI+CiAgICAgIDxkaXYgY2xhc3M9InNlY3Rpb24tZXllYnJvdyBzY3JvbGwtcmV2ZWFsIiBzdHlsZT0ianVzdGlmeS1jb250ZW50OmNlbnRlciI+SW1wYWN0PC9kaXY+CiAgICAgIDxoMiBjbGFzcz0ic2VjdGlvbi10aXRsZSBzY3JvbGwtcmV2ZWFsIiBzdHlsZT0idGV4dC1hbGlnbjpjZW50ZXIiPk51bWJlcnMgdGhhdDxicj48ZW0+c3BlYWsgZm9yIHRoZW1zZWx2ZXM8L2VtPjwvaDI+CiAgICAgIDxkaXYgY2xhc3M9InN0YXRzLWNhcmRzIHNjcm9sbC1yZXZlYWwiPgoKICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LWNhcmQiPgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC1jYXJkLXZhbCIgaWQ9InN0YXQtc2VydmVycyI+4oCUPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LWNhcmQta2V5Ij5TZXJ2ZXJzPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LXBvcG92ZXIiIGlkPSJwb3Atc2VydmVycyI+PC9kaXY+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxkaXYgY2xhc3M9InN0YXQtY2FyZCI+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LWNhcmQtdmFsIiBpZD0ic3RhdC1tZW1iZXJzIj7igJQ8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXQtY2FyZC1rZXkiPkRpc2NvcmQgbWVtYmVyczwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC1wb3BvdmVyIiBpZD0icG9wLW1lbWJlcnMiPjwvZGl2PgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJzdGF0LWNhcmQiPgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC1jYXJkLXZhbCI+My41QjxlbT4rPC9lbT48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InN0YXQtY2FyZC1rZXkiPkluIEdhbWUgY29udHJpYnV0aW9uczwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0ic3RhdC1wb3BvdmVyIiBpZD0icG9wLWdhbWVzIj48L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgPC9zZWN0aW9uPgoKICA8c2VjdGlvbiBpZD0icHJvamV0b3MiIGNsYXNzPSJwcm9qZWN0cyI+CiAgICA8ZGl2IGNsYXNzPSJwcm9qZWN0cy10b3AiPgogICAgICA8ZGl2PgogICAgICAgIDxkaXYgY2xhc3M9InNlY3Rpb24tZXllYnJvdyBzY3JvbGwtcmV2ZWFsIj5Xb3JrPC9kaXY+CiAgICAgICAgPGgyIGNsYXNzPSJzZWN0aW9uLXRpdGxlIHNjcm9sbC1yZXZlYWwiPkZlYXR1cmVkPGJyPjxlbT5Qcm9qZWN0czwvZW0+PC9oMj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9InByb2plY3QtY2F0ZWdvcmllcyBzY3JvbGwtcmV2ZWFsIj4KICAgICAgICA8YnV0dG9uIGNsYXNzPSJjYXQtYnRuIGFjdGl2ZSIgZGF0YS1maWx0ZXI9ImFsbCI+QWxsPC9idXR0b24+CiAgICAgICAgPGJ1dHRvbiBjbGFzcz0iY2F0LWJ0biIgZGF0YS1maWx0ZXI9InN0YWZmIj5TdGFmZjwvYnV0dG9uPgogICAgICAgIDxidXR0b24gY2xhc3M9ImNhdC1idG4iIGRhdGEtZmlsdGVyPSJ0cmFuc2xhdG9yIj5UcmFuc2xhdG9yPC9idXR0b24+CiAgICAgICAgPGJ1dHRvbiBjbGFzcz0iY2F0LWJ0biIgZGF0YS1maWx0ZXI9InByb2dyYW1zIj5Qcm9ncmFtczwvYnV0dG9uPgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgoKICAgIDxkaXYgY2xhc3M9InByb2plY3RzLWdyaWQiIGlkPSJwcm9qZWN0cy1jb250YWluZXIiPjwvZGl2PgogIDwvc2VjdGlvbj4KCiAgPHNlY3Rpb24gaWQ9ImhpcmUiIGNsYXNzPSJoaXJlIj4KICAgIDxkaXYgY2xhc3M9ImhpcmUtYmctdGV4dCI+SElSRTwvZGl2PgogICAgPGRpdiBjbGFzcz0iaGlyZS1pbm5lciI+CiAgICAgIDxkaXYgY2xhc3M9InNlY3Rpb24tZXllYnJvdyBzY3JvbGwtcmV2ZWFsIiBzdHlsZT0ianVzdGlmeS1jb250ZW50OmNlbnRlciI+Q29udGFjdDwvZGl2PgogICAgICA8aDIgY2xhc3M9ImhpcmUtdGl0bGUgc2Nyb2xsLXJldmVhbCI+TGV0J3MgYnVpbGQgc29tZXRoaW5nPGJyPjxlbT5pbmNyZWRpYmxlIHRvZ2V0aGVyPC9lbT48L2gyPgogICAgICA8cCBjbGFzcz0iaGlyZS1zdWIgc2Nyb2xsLXJldmVhbCI+RmVlbCBmcmVlIHRvIHJlYWNoIG91dCB0aHJvdWdoIGFueSBvZiB0aGUgZm9sbG93aW5nIHBsYXRmb3Jtcy4gSSdsbCBnZXQgYmFjayB0byB5b3UgYXMgc29vbiBhcyBwb3NzaWJsZSE8L3A+CgogICAgICA8ZGl2IGNsYXNzPSJjb250YWN0LXJvdyBzY3JvbGwtcmV2ZWFsIj4KICAgICAgICA8YSBocmVmPSJodHRwczovL2Rpc2NvcmQuY29tL3VzZXJzLzQ1NTA1MDcxODQ5NjE2MTgwMiIgY2xhc3M9ImNvbnRhY3QtY2FyZCIgdGFyZ2V0PSJfYmxhbmsiPgogICAgICAgICAgPGRpdiBjbGFzcz0iY2MtaWNvbiI+8J+SrDwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0iY2MtaW5mbyI+CiAgICAgICAgICAgIDxzdHJvbmc+RGlzY29yZDwvc3Ryb25nPgogICAgICAgICAgICA8c3Bhbj5AeGVlZXZhPC9zcGFuPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJjYy1hcnJvdyI+4oaXPC9kaXY+CiAgICAgICAgPC9hPgogICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vaW5zdGFncmFtLmNvbS92aW5pdmFsbHoiIGNsYXNzPSJjb250YWN0LWNhcmQiIHRhcmdldD0iX2JsYW5rIj4KICAgICAgICAgIDxkaXYgY2xhc3M9ImNjLWljb24iPvCfk7g8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9ImNjLWluZm8iPgogICAgICAgICAgICA8c3Ryb25nPkluc3RhZ3JhbTwvc3Ryb25nPgogICAgICAgICAgICA8c3Bhbj5AdmluaXZhbGx6PC9zcGFuPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJjYy1hcnJvdyI+4oaXPC9kaXY+CiAgICAgICAgPC9hPgogICAgICAgIDxhIGhyZWY9Im1haWx0bzp2aW5pY2l1c3ZhbGxlcm9kcmlndWVzQGdtYWlsLmNvbSIgY2xhc3M9ImNvbnRhY3QtY2FyZCI+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJjYy1pY29uIj7inInvuI88L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9ImNjLWluZm8iPgogICAgICAgICAgICA8c3Ryb25nPkVtYWlsPC9zdHJvbmc+CiAgICAgICAgICAgIDxzcGFuPnZpbmljaXVzdmFsbGVyb2RyaWd1ZXNAZ21haWwuY29tPC9zcGFuPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJjYy1hcnJvdyI+4oaXPC9kaXY+CiAgICAgICAgPC9hPgogICAgICA8L2Rpdj4KCiAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZGlzY29yZC5jb20vdXNlcnMvNDU1MDUwNzE4NDk2MTYxODAyIiBjbGFzcz0iYnRuLXByaW1hcnkgYnRuLWJpZyBzY3JvbGwtcmV2ZWFsIiB0YXJnZXQ9Il9ibGFuayI+CiAgICAgICAgPHNwYW4+R2V0IGluIFRvdWNoPC9zcGFuPgogICAgICAgIDxzdmcgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiPjxwYXRoIGQ9Ik0zIDhoMTBNOSA0bDQgNC00IDQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+CiAgICAgIDwvYT4KICAgIDwvZGl2PgogIDwvc2VjdGlvbj4KCiAgPGZvb3Rlcj4KICAgIDxwIGNsYXNzPSJmb290ZXItbGVmdCI+wqkgMjAyNiA8c3BhbiBjbGFzcz0iZm9vdC1hY2NlbnQiPlhldmE8L3NwYW4+PC9wPgogICAgPHAgY2xhc3M9ImZvb3Rlci1jZW50ZXIiPkJ1aWx0IHdpdGggY2FyZSDinKY8L3A+CiAgICA8ZGl2IGNsYXNzPSJmb290ZXItcmlnaHQiPgogICAgICA8YSBocmVmPSJodHRwczovL2Rpc2NvcmQuY29tL3VzZXJzLzQ1NTA1MDcxODQ5NjE2MTgwMiIgdGFyZ2V0PSJfYmxhbmsiPkRpc2NvcmQ8L2E+CiAgICAgIDxhIGhyZWY9Imh0dHBzOi8vaW5zdGFncmFtLmNvbS92aW5pdmFsbHoiIHRhcmdldD0iX2JsYW5rIj5JbnN0YWdyYW08L2E+CiAgICA8L2Rpdj4KICA8L2Zvb3Rlcj4KCiAgPGRpdiBpZD0icHJvamVjdC1tb2RhbCI+CiAgICA8ZGl2IGNsYXNzPSJtb2RhbC1iYWNrZHJvcCI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJtb2RhbC1jb250ZW50Ij4KICAgICAgPGJ1dHRvbiBjbGFzcz0ibW9kYWwtY2xvc2UiIGFyaWEtbGFiZWw9IkNsb3NlIj4mdGltZXM7PC9idXR0b24+CiAgICAgIDxkaXYgY2xhc3M9Im1vZGFsLWltZy13cmFwIj4KICAgICAgICA8aW1nIGlkPSJtb2RhbC1pbWFnZSIgc3JjPSIiIGFsdD0iIiAvPgogICAgICAgIDxkaXYgY2xhc3M9Im1vZGFsLWltZy1vdmVybGF5Ij48L2Rpdj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Im1vZGFsLWJvZHkiPgogICAgICAgIDxkaXYgY2xhc3M9Im1vZGFsLXRhZyIgaWQ9Im1vZGFsLXRhZyI+PC9kaXY+CiAgICAgICAgPGgyIGlkPSJtb2RhbC10aXRsZSI+PC9oMj4KICAgICAgICA8cCBpZD0ibW9kYWwtZGVzY3JpcHRpb24iPjwvcD4KICAgICAgICA8YSBpZD0ibW9kYWwtbGluayIgY2xhc3M9ImJ0bi1wcmltYXJ5IiBocmVmPSIjIiB0YXJnZXQ9Il9ibGFuayI+CiAgICAgICAgICA8c3Bhbj5TZWUgUHJvamVjdDwvc3Bhbj4KICAgICAgICAgIDxzdmcgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgMTYgMTYiIGZpbGw9Im5vbmUiPjxwYXRoIGQ9Ik0zIDhoMTBNOSA0bDQgNC00IDQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+CiAgICAgICAgPC9hPgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8c2NyaXB0IHNyYz0ianMvc2NyaXB0LmpzIiBkZWZlcj48L3NjcmlwdD4KPC9ib2R5Pgo8L2h0bWw+"))));</script>
+  <!-- ══════════════════════════════════
+       HERO
+  ══════════════════════════════════ -->
+  <section id="hero">
+    <!-- background image -->
+    <div class="hero-bg-img" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1800&q=80&auto=format&fit=crop"
+        alt=""
+        loading="eager"
+      />
+    </div>
+
+    <div class="hero-content section-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Disponível para novos projetos
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line"><span>Seu negócio</span></span>
+        <span class="line"><span>merece um site</span></span>
+        <span class="line"><span>que <span class="invert">converte.</span></span></span>
+      </h1>
+
+      <p class="hero-type-row">
+        <span id="typeText"></span><span class="type-cursor"></span>
+      </p>
+
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">
+          Quero meu site agora
+          <span class="arr">→</span>
+        </a>
+        <a href="#services" class="btn-ghost">Ver serviços</a>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-val">
+            <span data-count="2.5" data-suffix="M+">2.5M+</span>
+          </div>
+          <p class="metric-label">pessoas alcançadas<br>com meu trabalho</p>
+        </div>
+        <div class="metric">
+          <div class="metric-val">
+            <span data-count="5" data-suffix="+">5+</span>
+          </div>
+          <p class="metric-label">grandes comunidades<br>digitais gerenciadas</p>
+        </div>
+        <div class="metric">
+          <div class="metric-val">
+            <span data-count="14" data-suffix=" dias">14 dias</span>
+          </div>
+          <p class="metric-label">prazo médio de<br>entrega dos projetos</p>
+        </div>
+        <div class="metric">
+          <div class="metric-val">
+            <span data-count="100" data-suffix="%">100%</span>
+          </div>
+          <p class="metric-label">foco no seu<br>resultado final</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       REEL — image strip
+  ══════════════════════════════════ -->
+  <div id="reel" aria-hidden="true">
+    <div class="reel-track">
+      <div class="reel-item">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=680&q=75&auto=format&fit=crop" alt="Web design" loading="lazy" />
+        <span class="reel-item-label">Landing Page</span>
+      </div>
+      <div class="reel-item">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=680&q=75&auto=format&fit=crop" alt="Código" loading="lazy" />
+        <span class="reel-item-label">Código Limpo</span>
+      </div>
+      <div class="reel-item">
+        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=680&q=75&auto=format&fit=crop" alt="Design" loading="lazy" />
+        <span class="reel-item-label">UI Design</span>
+      </div>
+      <div class="reel-item">
+        <img src="https://images.unsplash.com/photo-1547119957-637f8679db1e?w=680&q=75&auto=format&fit=crop" alt="Responsivo" loading="lazy" />
+        <span class="reel-item-label">Mobile First</span>
+      </div>
+      <div class="reel-item">
+        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=680&q=75&auto=format&fit=crop" alt="Performance" loading="lazy" />
+        <span class="reel-item-label">Performance</span>
+      </div>
+      <div class="reel-item">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=680&q=75&auto=format&fit=crop" alt="Entrega" loading="lazy" />
+        <span class="reel-item-label">Entrega Rápida</span>
+      </div>
+      <!-- duplicated by JS for seamless loop -->
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       PAIN
+  ══════════════════════════════════ -->
+  <section id="pain">
+    <div class="section-inner">
+      <div class="pain-grid">
+        <!-- left -->
+        <div>
+          <p class="eyebrow reveal">O problema real</p>
+          <h2 class="section-title reveal">Enquanto você adia,<br>seu concorrente<br>está vendendo.</h2>
+
+          <ul class="pain-list">
+            <li class="pain-item reveal">
+              <div class="pain-item-icon">✕</div>
+              <p><strong>Site genérico que não fica na memória.</strong> Parece igual ao do concorrente e o cliente escolhe pelo preço, não pelo valor.</p>
+            </li>
+            <li class="pain-item reveal">
+              <div class="pain-item-icon">✕</div>
+              <p><strong>Carrega devagar, perde o cliente em 3 segundos.</strong> Antes de ver o que você oferece, ele já foi embora.</p>
+            </li>
+            <li class="pain-item reveal">
+              <div class="pain-item-icon">✕</div>
+              <p><strong>Agência cobrou caro, entregou tarde e sumiu.</strong> Você recebeu um site que não converte e ainda tem que pagar mensalidade pra manter.</p>
+            </li>
+            <li class="pain-item reveal">
+              <div class="pain-item-icon">✕</div>
+              <p><strong>Não aparece no Google.</strong> De nada adianta um site bonito que ninguém encontra.</p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- right — image -->
+        <div class="pain-visual reveal from-right">
+          <div class="pain-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80&auto=format&fit=crop"
+              alt="Trabalho de web design"
+              loading="lazy"
+            />
+          </div>
+          <div class="pain-card-float">
+            <strong>75%</strong>
+            <p>dos usuários julgam a credibilidade de um negócio pelo design do site — Stanford Web Credibility Research</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SERVICES
+  ══════════════════════════════════ -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="services-header">
+        <div>
+          <p class="eyebrow reveal">O que eu entrego</p>
+          <h2 class="section-title reveal" style="max-width:380px;">Tudo que você precisa. Nada que você não.</h2>
+        </div>
+        <p class="section-sub reveal">Sem pacotes inflados, sem cobranças escondidas. Você escolhe o que faz sentido pro seu negócio e eu entrego.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <p class="service-num">Serviço 01</p>
+          <h3>Landing Page de Alta Conversão</h3>
+          <p>Uma página feita para vender. Design focado em guiar o visitante até a ação — seja uma compra, um contato ou uma inscrição. Do zero ao no ar.</p>
+          <span class="service-pill">Mais pedido</span>
+        </div>
+        <div class="service-card">
+          <p class="service-num">Serviço 02</p>
+          <h3>Site Institucional</h3>
+          <p>A vitrine digital do seu negócio. Design profissional, responsivo e rápido que transmite confiança antes de o cliente dizer olá.</p>
+          <span class="service-pill">Popular</span>
+        </div>
+        <div class="service-card">
+          <p class="service-num">Serviço 03</p>
+          <h3>Loja Virtual</h3>
+          <p>E-commerce completo com carrinho, pagamento e gestão de produtos. Do zero ao primeiro pedido recebido.</p>
+          <span class="service-pill">Completo</span>
+        </div>
+        <div class="service-card">
+          <p class="service-num">Serviço 04</p>
+          <h3>Redesign & Otimização</h3>
+          <p>Seu site existe mas não converte? Analiso o problema, identifico o que freia e refaço o que precisa — sem jogar tudo no lixo.</p>
+          <span class="service-pill">Cirurgia</span>
+        </div>
+        <div class="service-card">
+          <p class="service-num">Serviço 05</p>
+          <h3>SEO & Performance</h3>
+          <p>Código estruturado para ranquear. Velocidade de carregamento que passa no PageSpeed. Resultado que aparece no Google.</p>
+          <span class="service-pill">Diferencial</span>
+        </div>
+        <div class="service-card">
+          <p class="service-num">Serviço 06</p>
+          <h3>Manutenção & Suporte</h3>
+          <p>Seu site ficou pronto mas você quer paz de espírito. Cuidado contínuo, atualizações e suporte direto comigo.</p>
+          <span class="service-pill">Contínuo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       WHY
+  ══════════════════════════════════ -->
+  <section id="why">
+    <div class="section-inner">
+      <div class="why-top">
+        <!-- image -->
+        <div class="why-img-wrap reveal from-left">
+          <img
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80&auto=format&fit=crop"
+            alt="Desenvolvimento web"
+            loading="lazy"
+          />
+          <span class="why-img-label">Feito por quem sabe fazer</span>
+        </div>
+
+        <!-- text -->
+        <div>
+          <p class="eyebrow reveal">Por que eu e não uma agência</p>
+          <h2 class="section-title reveal">A diferença que você vai sentir desde o dia 1.</h2>
+          <p class="section-sub reveal">Com uma agência você fala com um vendedor, depois com um gerente, depois com um estagiário. Comigo você fala direto com quem faz.</p>
+        </div>
+      </div>
+
+      <!-- 4 cards -->
+      <div class="why-cards">
+        <div class="why-card">
+          <div class="why-card-icon">🎯</div>
+          <h4>Contato direto com o criador</h4>
+          <p>Sem intermediários. Eu mesmo cuido do briefing, do design e do código. Zero telefone sem fio.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">⚡</div>
+          <h4>Entrega em dias, não meses</h4>
+          <p>Agências levam 30 a 90 dias. Eu trabalho focado e entrego em 7 a 14 dias úteis — sem enrolação.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🔑</div>
+          <h4>Código que você possui</h4>
+          <p>Você recebe o fonte completo. Sem dependências de plataformas que cobram mensalidade pra manter seu site no ar.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">📐</div>
+          <h4>Design com estratégia</h4>
+          <p>Cada cor, fonte e espaçamento tem um motivo. Não faço bonito por fazer — faço bonito pra converter.</p>
+        </div>
+      </div>
+
+      <!-- VS table -->
+      <div class="vs-wrap reveal">
+        <p class="vs-header">Xeeeva vs Agência Tradicional</p>
+        <table class="vs-table">
+          <thead>
+            <tr>
+              <th>Critério</th>
+              <th>Agência Tradicional</th>
+              <th>Xeeeva</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Prazo de entrega</td>
+              <td class="bad">30 a 90 dias</td>
+              <td class="good">7 a 14 dias úteis</td>
+            </tr>
+            <tr>
+              <td>Contato direto com o criador</td>
+              <td class="bad">Raramente</td>
+              <td class="good">Sempre</td>
+            </tr>
+            <tr>
+              <td>Código-fonte entregue</td>
+              <td class="bad">Nem sempre</td>
+              <td class="good">Sempre, 100%</td>
+            </tr>
+            <tr>
+              <td>Revisões incluídas</td>
+              <td class="bad">Cobradas à parte</td>
+              <td class="good">Incluídas no projeto</td>
+            </tr>
+            <tr>
+              <td>Preço transparente</td>
+              <td class="bad">Orçamento inflado</td>
+              <td class="good">Combinado antes de começar</td>
+            </tr>
+            <tr>
+              <td>SEO e performance</td>
+              <td class="bad">Opcional e pago</td>
+              <td class="good">Incluso em todo projeto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       PROCESS
+  ══════════════════════════════════ -->
+  <section id="process">
+    <div class="section-inner">
+      <div class="process-header">
+        <p class="eyebrow reveal">Como funciona</p>
+        <h2 class="section-title reveal">Simples, direto,<br>sem surpresa.</h2>
+        <p class="section-sub reveal">Do primeiro contato até o site no ar, você sabe exatamente o que está acontecendo em cada etapa.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <p class="process-step-num">Etapa 01</p>
+          <h4>Briefing & Proposta</h4>
+          <p>Me conta o seu negócio, objetivo e referências. Em até 24h você recebe uma proposta com escopo, prazo e valor — sem pegadinhas.</p>
+          <span class="process-step-time">⏱ até 24h</span>
+        </div>
+        <div class="process-step">
+          <p class="process-step-num">Etapa 02</p>
+          <h4>Design & Aprovação</h4>
+          <p>Crio o design completo antes de escrever uma linha de código. Você vê, opina e aprova. Só aí começo o desenvolvimento.</p>
+          <span class="process-step-time">⏱ 2 a 4 dias</span>
+        </div>
+        <div class="process-step">
+          <p class="process-step-num">Etapa 03</p>
+          <h4>Desenvolvimento</h4>
+          <p>Código limpo, rápido e responsivo. Você acompanha o progresso e pode dar feedback a qualquer momento — sem caixinha preta.</p>
+          <span class="process-step-time">⏱ 3 a 8 dias</span>
+        </div>
+        <div class="process-step">
+          <p class="process-step-num">Etapa 04</p>
+          <h4>Revisões & Entrega</h4>
+          <p>Ajustamos juntos até você estar satisfeito. No final: site no ar, código-fonte completo e suporte pós-entrega incluso.</p>
+          <span class="process-step-time">⏱ 1 a 3 dias</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       TESTIMONIALS
+  ══════════════════════════════════ -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="testi-header">
+        <p class="eyebrow reveal">Quem já trabalhou comigo</p>
+        <h2 class="section-title reveal">Resultados reais,<br>clientes reais.</h2>
+        <p class="section-sub reveal">Não é só site bonito. É resultado. Veja o que dizem quem já confiou no meu trabalho.</p>
+      </div>
+
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="testi-stars">★ ★ ★ ★ ★</p>
+          <p class="testi-text">"Eu tinha medo de investir num site e não ver retorno. Com o Vinicius foi diferente — <em>em duas semanas já estava recebendo contatos pelo site.</em> Processo transparente do início ao fim."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">M</div>
+            <div>
+              <p class="testi-name">Marcos T.</p>
+              <p class="testi-role">Dono de Barbearia</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <p class="testi-stars">★ ★ ★ ★ ★</p>
+          <p class="testi-text">"Tentei duas agências antes. Uma sumiu, outra entregou algo horrível. O Vinicius foi o único que <em>fez exatamente o que prometeu, no prazo combinado.</em> Nunca mais uso agência."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <p class="testi-name">Ana P.</p>
+              <p class="testi-role">Coach & Mentora</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <p class="testi-stars">★ ★ ★ ★ ★</p>
+          <p class="testi-text">"Minha loja virtual ficou exatamente do jeito que eu imaginava, mas <em>muito melhor do que esperava.</em> As vendas subiram desde o primeiro mês com o site novo. Vale cada centavo."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <p class="testi-name">Rafael S.</p>
+              <p class="testi-role">E-commerce de Moda</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CTA
+  ══════════════════════════════════ -->
+  <section id="cta">
+    <div class="cta-bg" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1800&q=80&auto=format&fit=crop"
+        alt=""
+        loading="lazy"
+      />
+    </div>
+
+    <div class="section-inner">
+      <div class="cta-inner">
+        <p class="eyebrow reveal" style="justify-content:center;">Vamos começar?</p>
+        <h2 class="section-title reveal" style="font-size:clamp(34px,5.5vw,68px);">
+          Seu site pode estar<br>no ar essa semana.
+        </h2>
+        <p class="section-sub reveal">
+          Cada dia sem um site profissional é um dia deixando dinheiro na mesa.
+          Me manda uma mensagem agora — o orçamento é grátis e sem compromisso.
+        </p>
+
+        <div class="cta-actions reveal">
+          <a href="https://discord.com/users/xeeeva" class="btn-primary" target="_blank" rel="noopener">
+            💬 Falar no Discord
+            <span class="arr">→</span>
+          </a>
+          <a href="mailto:contato@xeeeva.dev" class="btn-ghost">
+            ✉️ Mandar e-mail
+          </a>
+        </div>
+
+        <p class="avail-badge reveal">
+          <span class="avail-dot"></span>
+          Disponível agora · Respondo em até 24h
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer>
+    <a href="#" class="footer-logo">Xeeeva<span></span></a>
+    <p>© 2026 Xeeeva · Vinicius Valle Rodrigues · Todos os direitos reservados</p>
+  </footer>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>
