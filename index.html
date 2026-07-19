@@ -1,464 +1,336 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<!--
+===============================================================================
+ Project Authorship Notice
+-------------------------------------------------------------------------------
+
+ This project, including its HTML structure, CSS styling, JavaScript logic,
+ architecture, and implementation, was originally conceived, designed,
+ developed, and maintained by Xeeeva (Vinicius Valle Rodrigues).
+
+ All source code, technical solutions, system architecture, visual design,
+ and associated implementations contained within this project constitute
+ original work by the author unless explicitly stated otherwise.
+
+ Attribution to the original author should be preserved in all copies,
+ modifications, distributions, and derivative works of this codebase.
+
+ Copyright © 2026 Xeeeva (Vinicius Valle Rodrigues). All Rights Reserved.
+
+===============================================================================
+-->
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Xeeeva — Sites profissionais que vendem. Design, código e entrega rápida." />
-  <title>Xeeeva — Sites que vendem</title>
-  <link rel="stylesheet" href="./css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xeva — Developer & Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
 </head>
+
 <body>
-
-  <!-- CURSOR -->
-  <div class="c-dot"  id="cDot"></div>
-  <div class="c-ring" id="cRing"></div>
-
-  <!-- ══════════════════════════════════
-       NAV
-  ══════════════════════════════════ -->
-  <nav id="site-nav">
-    <a href="#" class="nav-logo">Xeeeva<span></span></a>
-    <div class="nav-links">
-      <a href="#services">Serviços</a>
-      <a href="#why">Diferenciais</a>
-      <a href="#process">Processo</a>
-      <a href="#cta" class="btn-nav">Solicitar orçamento →</a>
-    </div>
-  </nav>
-
-  <!-- ══════════════════════════════════
-       HERO
-  ══════════════════════════════════ -->
-  <section id="hero">
-    <!-- background image -->
-    <div class="hero-bg-img" aria-hidden="true">
-      <img
-        src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1800&q=80&auto=format&fit=crop"
-        alt=""
-        loading="eager"
-      />
-    </div>
-
-    <div class="hero-content section-inner">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        Disponível para novos projetos
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line"><span>Seu negócio</span></span>
-        <span class="line"><span>merece um site</span></span>
-        <span class="line"><span>que <span class="invert">converte.</span></span></span>
-      </h1>
-
-      <p class="hero-type-row">
-        <span id="typeText"></span><span class="type-cursor"></span>
-      </p>
-
-      <div class="hero-actions">
-        <a href="#cta" class="btn-primary">
-          Quero meu site agora
-          <span class="arr">→</span>
-        </a>
-        <a href="#services" class="btn-ghost">Ver serviços</a>
-      </div>
-
-      <div class="hero-metrics">
-        <div class="metric">
-          <div class="metric-val">
-            <span data-count="100+" data-suffix="K+">100K+</span>
-          </div>
-          <p class="metric-label">pessoas alcançadas<br>com meu trabalho</p>
-        </div>
-        <div class="metric">
-          <div class="metric-val">
-            <span data-count="5" data-suffix="+">5+</span>
-          </div>
-          <p class="metric-label">grandes comunidades<br>digitais gerenciadas</p>
-        </div>
-        <div class="metric">
-          <div class="metric-val">
-            <span data-count="14" data-suffix=" dias">14 dias</span>
-          </div>
-          <p class="metric-label">prazo médio de<br>entrega dos projetos</p>
-        </div>
-        <div class="metric">
-          <div class="metric-val">
-            <span data-count="100" data-suffix="%">100%</span>
-          </div>
-          <p class="metric-label">foco no seu<br>resultado final</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════
-       REEL — image strip
-  ══════════════════════════════════ -->
-  <div id="reel" aria-hidden="true">
-    <div class="reel-track">
-      <div class="reel-item">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=680&q=75&auto=format&fit=crop" alt="Web design" loading="lazy" />
-        <span class="reel-item-label">Landing Page</span>
-      </div>
-      <div class="reel-item">
-        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=680&q=75&auto=format&fit=crop" alt="Código" loading="lazy" />
-        <span class="reel-item-label">Código Limpo</span>
-      </div>
-      <div class="reel-item">
-        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=680&q=75&auto=format&fit=crop" alt="Design" loading="lazy" />
-        <span class="reel-item-label">UI Design</span>
-      </div>
-      <div class="reel-item">
-        <img src="https://images.unsplash.com/photo-1547119957-637f8679db1e?w=680&q=75&auto=format&fit=crop" alt="Responsivo" loading="lazy" />
-        <span class="reel-item-label">Mobile First</span>
-      </div>
-      <div class="reel-item">
-        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=680&q=75&auto=format&fit=crop" alt="Performance" loading="lazy" />
-        <span class="reel-item-label">Performance</span>
-      </div>
-      <div class="reel-item">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=680&q=75&auto=format&fit=crop" alt="Entrega" loading="lazy" />
-        <span class="reel-item-label">Entrega Rápida</span>
-      </div>
-      <!-- duplicated by JS for seamless loop -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo">X<span>.</span></div>
+      <p class="splash-sub">Developer & Creator</p>
+      <button id="splash-btn">
+        <span>Enter Portfolio</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════
-       PAIN
-  ══════════════════════════════════ -->
-  <section id="pain">
-    <div class="section-inner">
-      <div class="pain-grid">
-        <!-- left -->
-        <div>
-          <p class="eyebrow reveal">O problema real</p>
-          <h2 class="section-title reveal">Enquanto você adia,<br>seu concorrente<br>está vendendo.</h2>
+  <audio id="bg-music" loop>
+    <source src="./css/audio/musica.mp3" type="audio/mpeg">
+  </audio>
 
-          <ul class="pain-list">
-            <li class="pain-item reveal">
-              <div class="pain-item-icon">✕</div>
-              <p><strong>Site genérico que não fica na memória.</strong> Parece igual ao do concorrente e o cliente escolhe pelo preço, não pelo valor.</p>
-            </li>
-            <li class="pain-item reveal">
-              <div class="pain-item-icon">✕</div>
-              <p><strong>Carrega devagar, perde o cliente em 3 segundos.</strong> Antes de ver o que você oferece, ele já foi embora.</p>
-            </li>
-            <li class="pain-item reveal">
-              <div class="pain-item-icon">✕</div>
-              <p><strong>Agência cobrou caro, entregou tarde e sumiu.</strong> Você recebeu um site que não converte e ainda tem que pagar mensalidade pra manter.</p>
-            </li>
-            <li class="pain-item reveal">
-              <div class="pain-item-icon">✕</div>
-              <p><strong>Não aparece no Google.</strong> De nada adianta um site bonito que ninguém encontra.</p>
-            </li>
-          </ul>
-        </div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
 
-        <!-- right — image -->
-        <div class="pain-visual reveal from-right">
-          <div class="pain-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80&auto=format&fit=crop"
-              alt="Trabalho de web design"
-              loading="lazy"
-            />
-          </div>
-          <div class="pain-card-float">
-            <strong>75%</strong>
-            <p>dos usuários julgam a credibilidade de um negócio pelo design do site — Stanford Web Credibility Research</p>
-          </div>
-        </div>
+  <header id="site-header">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">X<span>.</span></a>
+      <nav>
+        <a href="#inicio" class="nav-link">Home</a>
+        <a href="#sobre" class="nav-link">About</a>
+        <a href="#projetos" class="nav-link">Projects</a>
+        <a href="#hire" class="nav-link">Hire Me</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#hire" class="btn-nav">Let's Talk →</a>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- ══════════════════════════════════
-       SERVICES
-  ══════════════════════════════════ -->
-  <section id="services">
-    <div class="section-inner">
-      <div class="services-header">
-        <div>
-          <p class="eyebrow reveal">O que eu entrego</p>
-          <h2 class="section-title reveal" style="max-width:380px;">Tudo que você precisa. Nada que você não.</h2>
-        </div>
-        <p class="section-sub reveal">Sem pacotes inflados, sem cobranças escondidas. Você escolhe o que faz sentido pro seu negócio e eu entrego.</p>
-      </div>
+  <section id="inicio" class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-      <div class="services-grid">
-        <div class="service-card">
-          <p class="service-num">Serviço 01</p>
-          <h3>Landing Page de Alta Conversão</h3>
-          <p>Uma página feita para vender. Design focado em guiar o visitante até a ação — seja uma compra, um contato ou uma inscrição. Do zero ao no ar.</p>
-          <span class="service-pill">Mais pedido</span>
-        </div>
-        <div class="service-card">
-          <p class="service-num">Serviço 02</p>
-          <h3>Site Institucional</h3>
-          <p>A vitrine digital do seu negócio. Design profissional, responsivo e rápido que transmite confiança antes de o cliente dizer olá.</p>
-          <span class="service-pill">Popular</span>
-        </div>
-        <div class="service-card">
-          <p class="service-num">Serviço 03</p>
-          <h3>Loja Virtual</h3>
-          <p>E-commerce completo com carrinho, pagamento e gestão de produtos. Do zero ao primeiro pedido recebido.</p>
-          <span class="service-pill">Completo</span>
-        </div>
-        <div class="service-card">
-          <p class="service-num">Serviço 04</p>
-          <h3>Redesign & Otimização</h3>
-          <p>Seu site existe mas não converte? Analiso o problema, identifico o que freia e refaço o que precisa — sem jogar tudo no lixo.</p>
-          <span class="service-pill">Cirurgia</span>
-        </div>
-        <div class="service-card">
-          <p class="service-num">Serviço 05</p>
-          <h3>SEO & Performance</h3>
-          <p>Código estruturado para ranquear. Velocidade de carregamento que passa no PageSpeed. Resultado que aparece no Google.</p>
-          <span class="service-pill">Diferencial</span>
-        </div>
-        <div class="service-card">
-          <p class="service-num">Serviço 06</p>
-          <h3>Manutenção & Suporte</h3>
-          <p>Seu site ficou pronto mas você quer paz de espírito. Cuidado contínuo, atualizações e suporte direto comigo.</p>
-          <span class="service-pill">Contínuo</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════
-       WHY
-  ══════════════════════════════════ -->
-  <section id="why">
-    <div class="section-inner">
-      <div class="why-top">
-        <!-- image -->
-        <div class="why-img-wrap reveal from-left">
-          <img
-            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80&auto=format&fit=crop"
-            alt="Desenvolvimento web"
-            loading="lazy"
-          />
-          <span class="why-img-label">Feito por quem sabe fazer</span>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge reveal">
+          <span class="badge-pulse"></span>
+          Available for work
         </div>
 
-        <!-- text -->
-        <div>
-          <p class="eyebrow reveal">Por que eu e não uma agência</p>
-          <h2 class="section-title reveal">A diferença que você vai sentir desde o dia 1.</h2>
-          <p class="section-sub reveal">Com uma agência você fala com um vendedor, depois com um gerente, depois com um estagiário. Comigo você fala direto com quem faz.</p>
-        </div>
-      </div>
+        <h1 class="hero-title reveal-up">
+          <span class="line-wrap"><span class="line">Hello, I'm</span></span>
+          <span class="line-wrap name-wrap"><span class="line name-big">Xeva</span><span class="wave-emoji"></span></span>
+        </h1>
 
-      <!-- 4 cards -->
-      <div class="why-cards">
-        <div class="why-card">
-          <div class="why-card-icon">🎯</div>
-          <h4>Contato direto com o criador</h4>
-          <p>Sem intermediários. Eu mesmo cuido do briefing, do design e do código. Zero telefone sem fio.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card-icon">⚡</div>
-          <h4>Entrega em dias, não meses</h4>
-          <p>Agências levam 30 a 90 dias. Eu trabalho focado e entrego em 7 a 14 dias úteis — sem enrolação.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card-icon">🔑</div>
-          <h4>Código que você possui</h4>
-          <p>Você recebe o fonte completo. Sem dependências de plataformas que cobram mensalidade pra manter seu site no ar.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card-icon">📐</div>
-          <h4>Design com estratégia</h4>
-          <p>Cada cor, fonte e espaçamento tem um motivo. Não faço bonito por fazer — faço bonito pra converter.</p>
-        </div>
-      </div>
+        <p class="hero-sub reveal-up delay-1">Developer, Translator & Community Manager with over <strong>6 years</strong> of experience building communities and shipping meaningful projects.</p>
 
-      <!-- VS table -->
-      <div class="vs-wrap reveal">
-        <p class="vs-header">Xeeeva vs Agência Tradicional</p>
-        <table class="vs-table">
-          <thead>
-            <tr>
-              <th>Critério</th>
-              <th>Agência Tradicional</th>
-              <th>Xeeeva</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Prazo de entrega</td>
-              <td class="bad">30 a 90 dias</td>
-              <td class="good">7 a 14 dias úteis</td>
-            </tr>
-            <tr>
-              <td>Contato direto com o criador</td>
-              <td class="bad">Raramente</td>
-              <td class="good">Sempre</td>
-            </tr>
-            <tr>
-              <td>Revisões incluídas</td>
-              <td class="bad">Cobradas à parte</td>
-              <td class="good">Incluídas no projeto</td>
-            </tr>
-            <tr>
-              <td>Preço transparente</td>
-              <td class="bad">Orçamento inflado</td>
-              <td class="good">Combinado antes de começar</td>
-            </tr>
-            <tr>
-              <td>SEO e performance</td>
-              <td class="bad">Opcional e pago</td>
-              <td class="good">Incluso em todo projeto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════
-       PROCESS
-  ══════════════════════════════════ -->
-  <section id="process">
-    <div class="section-inner">
-      <div class="process-header">
-        <p class="eyebrow reveal">Como funciona</p>
-        <h2 class="section-title reveal">Simples, direto,<br>sem surpresa.</h2>
-        <p class="section-sub reveal">Do primeiro contato até o site no ar, você sabe exatamente o que está acontecendo em cada etapa.</p>
-      </div>
-
-      <div class="process-steps">
-        <div class="process-step">
-          <p class="process-step-num">Etapa 01</p>
-          <h4>Briefing & Proposta</h4>
-          <p>Me conta o seu negócio, objetivo e referências. Em até 24h você recebe uma proposta com escopo, prazo e valor — sem pegadinhas.</p>
-          <span class="process-step-time">⏱ até 24h</span>
-        </div>
-        <div class="process-step">
-          <p class="process-step-num">Etapa 02</p>
-          <h4>Design & Aprovação</h4>
-          <p>Crio o design completo antes de escrever uma linha de código. Você vê, opina e aprova. Só aí começo o desenvolvimento.</p>
-          <span class="process-step-time">⏱ 2 a 4 dias</span>
-        </div>
-        <div class="process-step">
-          <p class="process-step-num">Etapa 03</p>
-          <h4>Desenvolvimento</h4>
-          <p>Código limpo, rápido e responsivo. Você acompanha o progresso e pode dar feedback a qualquer momento — sem caixinha preta.</p>
-          <span class="process-step-time">⏱ 3 a 8 dias</span>
-        </div>
-        <div class="process-step">
-          <p class="process-step-num">Etapa 04</p>
-          <h4>Revisões & Entrega</h4>
-          <p>Ajustamos juntos até você estar satisfeito. No final: site no ar, código-fonte completo e suporte pós-entrega incluso.</p>
-          <span class="process-step-time">⏱ 1 a 3 dias</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════
-       TESTIMONIALS
-  ══════════════════════════════════ -->
-  <section id="testimonials">
-    <div class="section-inner">
-      <div class="testi-header">
-        <p class="eyebrow reveal">Quem já trabalhou comigo</p>
-        <h2 class="section-title reveal">Resultados reais,<br>clientes reais.</h2>
-        <p class="section-sub reveal">Não é só site bonito. É resultado. Veja o que dizem quem já confiou no meu trabalho.</p>
-      </div>
-
-      <div class="testi-grid">
-        <div class="testi-card">
-          <p class="testi-stars">★ ★ ★ ★ ★</p>
-          <p class="testi-text">"Eu tinha medo de investir num site e não ver retorno. Com o Vinicius foi diferente — <em>em duas semanas já estava recebendo contatos pelo site.</em> Processo transparente do início ao fim."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">M</div>
-            <div>
-              <p class="testi-name">Marcos T.</p>
-              <p class="testi-role">Dono de Barbearia</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <p class="testi-stars">★ ★ ★ ★ ★</p>
-          <p class="testi-text">"Tentei duas agências antes. Uma sumiu, outra entregou algo horrível. O Vinicius foi o único que <em>fez exatamente o que prometeu, no prazo combinado.</em> Nunca mais uso agência."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">A</div>
-            <div>
-              <p class="testi-name">Ana P.</p>
-              <p class="testi-role">Coach & Mentora</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <p class="testi-stars">★ ★ ★ ★ ★</p>
-          <p class="testi-text">"Minha loja virtual ficou exatamente do jeito que eu imaginava, mas <em>muito melhor do que esperava.</em> As vendas subiram desde o primeiro mês com o site novo. Vale cada centavo."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">R</div>
-            <div>
-              <p class="testi-name">Rafael S.</p>
-              <p class="testi-role">E-commerce de Moda</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════
-       CTA
-  ══════════════════════════════════ -->
-  <section id="cta">
-    <div class="cta-bg" aria-hidden="true">
-      <img
-        src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1800&q=80&auto=format&fit=crop"
-        alt=""
-        loading="lazy"
-      />
-    </div>
-
-    <div class="section-inner">
-      <div class="cta-inner">
-        <p class="eyebrow reveal" style="justify-content:center;">Vamos começar?</p>
-        <h2 class="section-title reveal" style="font-size:clamp(34px,5.5vw,68px);">
-          Seu site pode estar<br>no ar essa semana.
-        </h2>
-        <p class="section-sub reveal">
-          Cada dia sem um site profissional é um dia deixando dinheiro na mesa.
-          Me manda uma mensagem agora — o orçamento é grátis e sem compromisso.
-        </p>
-
-        <div class="cta-actions reveal">
-          <a href="https://wa.me/5511981913011" class="btn-primary" target="_blank" rel="noopener">
-            💬 Conversar pelo Whatsapp
-            <span class="arr">→</span>
+        <div class="hero-actions reveal-up delay-2">
+          <a href="#projetos" class="btn-primary">
+            <span>See Projects</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="mailto:contato@xeeeva.dev" class="btn-ghost">
-            ✉️ Mandar e-mail
-          </a>
+          <a href="#hire" class="btn-ghost">Get in Touch</a>
         </div>
 
-        <p class="avail-badge reveal">
-          <span class="avail-dot"></span>
-          Disponível agora · Respondo em até 24h
-        </p>
+        <div class="hero-stats reveal-up delay-3">
+          <div class="stat">
+            <div class="stat-val">6<em> +</em></div>
+            <div class="stat-key">Years exp.</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <!-- hero-stat-members: atualizado automaticamente pelo JS -->
+            <div class="stat-val hero-stat-members">2.5M<em> +</em></div>
+            <div class="stat-key">Community members</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <div class="stat-val">7<em> +</em></div>
+            <div class="stat-key">Languages</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right reveal-scale">
+        <div class="avatar-frame">
+          <div class="avatar-bg-ring ring-1"></div>
+          <div class="avatar-bg-ring ring-2"></div>
+          <div class="avatar-bg-ring ring-3"></div>
+          <img class="avatar-img" src="https://i.pinimg.com/1200x/f7/76/4c/f7764c3bbb161d2a070ea9d3b4f2517d.jpg" alt="Xeva" />
+          <div class="avatar-badge-float">
+            <span class="dot-live"></span> Open to work
+          </div>
+        </div>
+
+        <div class="skill-float skill-float-1">JavaScript</div>
+        <div class="skill-float skill-float-2">Python</div>
+        <!-- skill-float-3: atualizado automaticamente pelo JS -->
+        <div class="skill-float skill-float-3">2.5M+ Members</div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>JavaScript</span><span class="dot-sep">✦</span>
+      <span>Python</span><span class="dot-sep">✦</span>
+      <span>Java</span><span class="dot-sep">✦</span>
+      <span>C / C++ / C#</span><span class="dot-sep">✦</span>
+      <span>Lua</span><span class="dot-sep">✦</span>
+      <span>TypeScript</span><span class="dot-sep">✦</span>
+      <span>HTML & CSS</span><span class="dot-sep">✦</span>
+      <span>PHP</span><span class="dot-sep">✦</span>
+      <span>Translation</span><span class="dot-sep">✦</span>
+      <span>Community Mgmt</span><span class="dot-sep">✦</span>
+      <span>Journalism</span><span class="dot-sep">✦</span>
+      <span>JavaScript</span><span class="dot-sep">✦</span>
+      <span>Python</span><span class="dot-sep">✦</span>
+      <span>Java</span><span class="dot-sep">✦</span>
+      <span>C / C++ / C#</span><span class="dot-sep">✦</span>
+      <span>Lua</span><span class="dot-sep">✦</span>
+      <span>TypeScript</span><span class="dot-sep">✦</span>
+      <span>HTML & CSS</span><span class="dot-sep">✦</span>
+      <span>PHP</span><span class="dot-sep">✦</span>
+      <span>Translation</span><span class="dot-sep">✦</span>
+      <span>Community Mgmt</span><span class="dot-sep">✦</span>
+      <span>Journalism</span><span class="dot-sep">✦</span>
+    </div>
+  </div>
+
+  <section id="sobre" class="about">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="section-eyebrow scroll-reveal">About me</div>
+        <h2 class="section-title scroll-reveal">More than just<br><em>a developer</em></h2>
+        <p class="about-body scroll-reveal">Hey there! I'm Xeeeva. I'm a translator, programmer, journalist, developer, and much more. This portfolio gives a glimpse into my work, skills, and experience across technology, community management, and content creation.</p>
+
+        <div class="about-tags scroll-reveal">
+          <span class="tag">Builder</span>
+          <span class="tag">Translator</span>
+          <span class="tag">Journalist</span>
+          <span class="tag">Community Lead</span>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="skills-card scroll-reveal">
+          <div class="skills-card-header">
+            <span class="skills-label">Skills & Expertise</span>
+            <span class="skills-count">11 technologies</span>
+          </div>
+          <div class="skill-group">
+            <div class="sg-title">Programming Languages</div>
+            <div class="sg-pills">
+              <span>JavaScript</span><span>Java</span><span>Python</span><span>C</span><span>C#</span><span>C++</span><span>Lua</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="sg-title">Web Development</div>
+            <div class="sg-pills">
+              <span>HTML</span><span>CSS</span><span>TypeScript</span><span>PHP</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="sg-title">Community Management</div>
+            <div class="sg-pills large">
+              <!-- skill-discord-pill: atualizado automaticamente pelo JS -->
+              <span class="skill-discord-pill">Discord — 2.5M+ Members</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="sg-title">Other Skills</div>
+            <div class="sg-pills">
+              <span>Translation</span><span>Project Dev</span><span>Journalism</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════
-       FOOTER
-  ══════════════════════════════════ -->
+  <section id="stats" class="stats-section">
+    <div class="stats-inner">
+      <div class="section-eyebrow scroll-reveal" style="justify-content:center">Impact</div>
+      <h2 class="section-title scroll-reveal" style="text-align:center">Numbers that<br><em>speak for themselves</em></h2>
+      <div class="stats-cards scroll-reveal">
+
+        <div class="stat-card">
+          <div class="stat-card-val" id="stat-servers">—</div>
+          <div class="stat-card-key">Servers</div>
+          <div class="stat-popover" id="pop-servers"></div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-val" id="stat-members">—</div>
+          <div class="stat-card-key">Discord members</div>
+          <div class="stat-popover" id="pop-members"></div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-val">3.5B<em>+</em></div>
+          <div class="stat-card-key">In Game contributions</div>
+          <div class="stat-popover" id="pop-games"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos" class="projects">
+    <div class="projects-top">
+      <div>
+        <div class="section-eyebrow scroll-reveal">Work</div>
+        <h2 class="section-title scroll-reveal">Featured<br><em>Projects</em></h2>
+      </div>
+      <div class="project-categories scroll-reveal">
+        <button class="cat-btn active" data-filter="all">All</button>
+        <button class="cat-btn" data-filter="staff">Staff</button>
+        <button class="cat-btn" data-filter="translator">Translator</button>
+        <button class="cat-btn" data-filter="programs">Programs</button>
+      </div>
+    </div>
+
+    <div class="projects-grid" id="projects-container"></div>
+  </section>
+
+  <section id="hire" class="hire">
+    <div class="hire-bg-text">HIRE</div>
+    <div class="hire-inner">
+      <div class="section-eyebrow scroll-reveal" style="justify-content:center">Contact</div>
+      <h2 class="hire-title scroll-reveal">Let's build something<br><em>incredible together</em></h2>
+      <p class="hire-sub scroll-reveal">Feel free to reach out through any of the following platforms. I'll get back to you as soon as possible!</p>
+
+      <div class="contact-row scroll-reveal">
+        <a href="https://discord.com/users/455050718496161802" class="contact-card" target="_blank">
+          <div class="cc-icon">💬</div>
+          <div class="cc-info">
+            <strong>Discord</strong>
+            <span>@xeeeva</span>
+          </div>
+          <div class="cc-arrow">↗</div>
+        </a>
+        <a href="https://instagram.com/vinivallz" class="contact-card" target="_blank">
+          <div class="cc-icon">📸</div>
+          <div class="cc-info">
+            <strong>Instagram</strong>
+            <span>@vinivallz</span>
+          </div>
+          <div class="cc-arrow">↗</div>
+        </a>
+        <a href="mailto:viniciusvallerodrigues@gmail.com" class="contact-card">
+          <div class="cc-icon">✉️</div>
+          <div class="cc-info">
+            <strong>Email</strong>
+            <span>viniciusvallerodrigues@gmail.com</span>
+          </div>
+          <div class="cc-arrow">↗</div>
+        </a>
+      </div>
+
+      <a href="https://discord.com/users/455050718496161802" class="btn-primary btn-big scroll-reveal" target="_blank">
+        <span>Get in Touch</span>
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
   <footer>
-    <a href="#" class="footer-logo">Xeeeva<span></span></a>
-    <p>© 2026 Xeeeva · Vinicius Valle Rodrigues · Todos os direitos reservados</p>
+    <p class="footer-left">© 2026 <span class="foot-accent">Xeva</span></p>
+    <p class="footer-center">Built with care ✦</p>
+    <div class="footer-right">
+      <a href="https://discord.com/users/455050718496161802" target="_blank">Discord</a>
+      <a href="https://instagram.com/vinivallz" target="_blank">Instagram</a>
+    </div>
   </footer>
 
-  <script src="./js/script.js"></script>
+  <div id="project-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-img-wrap">
+        <img id="modal-image" src="" alt="" />
+        <div class="modal-img-overlay"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-tag" id="modal-tag"></div>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+        <a id="modal-link" class="btn-primary" href="#" target="_blank">
+          <span>See Project</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js" defer></script>
 </body>
 </html>
